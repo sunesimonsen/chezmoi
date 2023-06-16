@@ -23,14 +23,15 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq doom-font "DejaVu Sans Mono-16")
-
-;;'("DejaVu Sans Mono"
-                               ;;:size 16
-                               ;;:weight normal
-                               ;;:width normal
-                               ;;:powerline-scale 1.1)
 ;;
+
+(when (eq system-type 'darwin)
+  (setq doom-font "Menlo-16"))
+
+(when (eq system-type 'gnu/linux)
+  (setq doom-font "DejaVu Sans Mono-16"))
+
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -189,3 +190,27 @@
 (after! evil-snipe
   (map! :nm "s" #'evil-avy-goto-word-1
         :nm "S" #'evil-avy-goto-char-timer))
+
+;; Projectile
+(after! projectile
+  (appendq! projectile-other-file-alist
+            '(("js" "spec.js")
+              ("spec.js" "js")
+              ("spec.rb" "rb")
+              ("rb" "spec.rb")))
+
+  ; re-index with projectile-discover-projects-in-search-path
+  (setq projectile-project-search-path '(("~/Code" . 2))))
+
+;; Ruby
+(add-hook! ruby-mode
+  (setq-local flycheck-command-wrapper-function
+              (lambda (command) (append '("bundle" "exec") command))))
+
+;; Disable format all for specific modes
+(setq +format-on-save-enabled-modes
+      (append +format-on-save-enabled-modes '(ruby-mode mhtml-mode)))
+
+;; Company
+(after! company
+  (map! :i "C-x C-l" 'evil-complete-previous-line))
