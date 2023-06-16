@@ -213,4 +213,7 @@
 
 ;; Company
 (after! company
-  (map! :i "C-x C-l" 'evil-complete-previous-line))
+  (map! :i "C-x C-l" 'evil-complete-previous-line)
+
+  ;; Disable automatic popup
+  (setq company-idle-delay nil))
