@@ -17,7 +17,7 @@ Before you apply the changes, run chezmoi diff to see if it will override anythi
 
 Alternatively you can run chezmoi apply and you will be prompted.
 
-# Apply
+# Apply changes from Github
 
 ```sh
 chezmoi update
