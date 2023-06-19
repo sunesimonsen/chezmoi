@@ -49,3 +49,5 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! runtests)
+(package! jsonnet-mode)
+(package! protobuf-mode)
