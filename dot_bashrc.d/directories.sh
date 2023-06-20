@@ -6,3 +6,7 @@ alias ..='cd ..'
 if [ -f /usr/libexec/z.sh ]; then
     . /usr/libexec/z.sh
 fi
+
+if [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
+    . "$(brew --prefix)/etc/profile.d/z.sh"
+fi
