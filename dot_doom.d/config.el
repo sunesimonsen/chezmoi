@@ -83,6 +83,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; UI
+
+(setq mac-right-option-modifier 'meta)
+(setq ns-right-option-modifier  'meta)
+
 ;; Evil
 (setq
  evil-snipe-scope 'whole-visible
@@ -214,6 +219,10 @@
 ;; Company
 (after! company
   (map! :i "C-x C-l" 'evil-complete-previous-line)
+
+  ;; allow code completion matching all buffer
+  (setq company-dabbrev-code-other-buffers 'all)
+  (setq company-dabbrev-other-buffers 'all)
 
   ;; Disable automatic popup
   (setq company-idle-delay nil))
