@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-export EDITOR=emacs
+export EDITOR=emacsclient
+
+alias evil="emacsclient"

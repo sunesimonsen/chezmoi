@@ -19,7 +19,7 @@
     stc = diff --name-only --diff-filter=U
     cbr = !git branch --merged | grep -v "master" | grep -v "main" | xargs -n 1 git branch -d
     fixup = "!sh -c '(git diff-files --quiet || (echo Unstaged changes, please commit or stash with --keep-index; exit 1)) && COMMIT=$(git rev-parse $1) && git commit --fixup=$COMMIT && git rebase -i --autosquash $COMMIT~1' -"
-    memento = !git for-each-ref --sort=-committerdate --count=20 --format='%(refname:short)' refs/heads/
+    memento = !git for-each-ref --sort=-committerdate --count=20 --format='%(refname:short)' refs/heads/ | tac
 [pull]
     # Only pull branches that have been set up to track a remote branch.
     default = current
@@ -36,3 +36,5 @@
 	includeStatusHeader = false
 	includePullRequestsSection = false
 	includeIssuesSection = false
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
