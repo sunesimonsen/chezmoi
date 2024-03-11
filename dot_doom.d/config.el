@@ -226,3 +226,61 @@
 
   ;; Disable automatic popup
   (setq company-idle-delay nil))
+
+;; Magit
+(after! magit
+  (setq magit-git-environment
+        (append magit-git-environment
+                (list "TERM=dumb" "COLOR=0"))))
+
+;; gotmpl
+(define-derived-mode gohtml-mode html-mode "Go HTML mode"
+  "A major mode for Go HTML templates")
+
+(add-to-list 'auto-mode-alist '("\\.gohtml\\'" . gohtml-mode))
+;; Denote
+(use-package! denote
+  :init
+  (defun denote-open-dired-directory ()
+    (interactive)
+    (dired denote-directory)
+    (dired-hide-details-mode))
+
+  (setq denote-directory (file-truename "~/Dropbox/org/denote/"))
+  (setq denote-known-keywords '(zendesk project tools js gtd))
+
+  (setq denote-inbox-file
+        (concat denote-directory "20231228T091750--inbox__gtd.org"))
+  ;;(directory-files denote-directory)
+  ;;
+  (defun denote-find ()
+    (interactive)
+    (counsel-find-file "" denote-directory))
+
+  (map! :leader
+        (:prefix-map ("d" . "denote")
+         :desc "Dired" "d" #'denote-open-dired-directory
+         :desc "Inbox" "i" (lambda()
+                             (interactive)
+                             (find-file denote-inbox-file))
+         :desc "New" "n" #'denote
+         :desc "Find" "f" #'denote-find
+         (:prefix-map ("r" . "rename")
+          :desc "Using front matter" "f" #'denote-rename-file-using-front-matter)
+         (:prefix-map ("l" . "link")
+          :desc "Insert" "l" #'denote-insert-link
+          :desc "Insert (REGEX)" "r" #'denote-link-insert-links-matching-regexp)
+         (:prefix-map ("k" . "add")
+          :desc "Keywords" "a" #'denote-keywords-add
+          :desc "Keywords" "r" #'denote-keywords-remove))))
+
+
+(use-package! ispell
+  :init
+  (setq ispell-program-name "hunspell")
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        '(
+          ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)
+          ("da_DK" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "da_DK") nil utf-8)))
+  (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
