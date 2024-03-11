@@ -83,8 +83,18 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; UI
+;; æøå
+(map!
+ :i
+ :map key-translation-map
+ "M-'" (kbd "æ")
+ "M-o" (kbd "ø")
+ "M-a" (kbd "å")
+ "M-\"" (kbd "Æ")
+ "M-O" (kbd "Ø")
+ "M-A" (kbd "Å"))
 
+;; UI
 (setq mac-right-option-modifier 'meta)
 (setq ns-right-option-modifier  'meta)
 
@@ -204,7 +214,7 @@
               ("spec.rb" "rb")
               ("rb" "spec.rb")))
 
-  ; re-index with projectile-discover-projects-in-search-path
+  ;; re-index with projectile-discover-projects-in-search-path
   (setq projectile-project-search-path '(("~/Code" . 2))))
 
 ;; Ruby
