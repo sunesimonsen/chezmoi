@@ -7,7 +7,8 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Sune Simonsen"
-      user-mail-address "sune@we-knowhow.dk")
+      user-mail-address "sune@we-knowhow.dk"
+      zendesk (getenv "ZENDESK_CODE_DIR"))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -295,3 +296,52 @@
           ("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)
           ("da_DK" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "da_DK") nil utf-8)))
   (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist))
+
+(when zendesk
+  ;; runner
+  (use-package! vterm
+    :init
+    (setq vterm-runner-commands
+          '(("run:guide-client" "~/Code/zendesk/guide-client" "yarn start\n")
+            ("run:markup-editor" "~/Code/zendesk/guide-client/packages/guide-client-markup-editor" "yarn watch\n")))
+
+    (let* ((app-dir "~/Code/zendesk/guide-client/apps")
+           (apps (directory-files app-dir)))
+
+      (dolist (app apps)
+        (unless (member app '("." ".."))
+          (push
+           (list (concat "run:" app) (concat app-dir "/" app) "yarn start\n")
+           vterm-runner-commands))))
+
+    (defun vterm-runner-run ()
+      (interactive)
+      (let* ((command-name
+              (completing-read
+               "Run: "
+               vterm-runner-commands
+               nil t ""))
+             (command-config (assoc command-name vterm-runner-commands))
+             (path (cadr command-config))
+             (command (caddr command-config))
+             (default-directory path)
+             (command-buffer-name (concat "*" command-name "*"))
+             (command-buffer (get-buffer command-buffer-name)))
+
+        (if command-buffer
+            (display-buffer command-buffer)
+          (vterm command-buffer-name)
+          (vterm-send-string command)
+          (evil-force-normal-state))))
+
+    (map! :leader
+          (:prefix-map ("r" . "run")
+           :desc "Terminal" "t" #'vterm-runner-run)))
+
+  (use-package! chatgpt-shell
+    :init
+    (setq chatgpt-shell-api-url-base "https://ai-gateway.zende.sk")
+    (setq chatgpt-shell-openai-key
+          (lambda ()
+            (let ((auth (car (auth-source-search :host "ai-gateway.zende.sk" :requires '(secret)))))
+              (funcall (plist-get auth :secret)))))))
