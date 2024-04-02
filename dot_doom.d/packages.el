@@ -53,3 +53,5 @@
 (package! jsonnet-mode)
 (package! protobuf-mode)
 (package! denote)
+(package! cheat-sh)
+(package! chatgpt-shell)

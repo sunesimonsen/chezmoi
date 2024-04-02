@@ -223,8 +223,8 @@
               (lambda (command) (append '("bundle" "exec") command))))
 
 ;; Disable format all for specific modes
-(setq +format-on-save-enabled-modes
-      (append +format-on-save-enabled-modes '(ruby-mode mhtml-mode)))
+;;(setq +format-on-save-enabled-modes
+;;      (append +format-on-save-enabled-modes '(ruby-mode mhtml-mode)))
 
 ;; Company
 (after! company
@@ -265,7 +265,8 @@
   ;;
   (defun denote-find ()
     (interactive)
-    (counsel-find-file "" denote-directory))
+    (let ((default-directory denote-directory))
+      (ido-find-file)))
 
   (map! :leader
         (:prefix-map ("d" . "denote")
