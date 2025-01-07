@@ -7,7 +7,7 @@ if [ -f /usr/libexec/z.sh ]; then
     . /usr/libexec/z.sh
 fi
 
-if command -v rbenv &> /dev/null; then
+if command -v brew &> /dev/null; then
     if [ -f "$(brew --prefix)/etc/profile.d/z.sh" ]; then
         . "$(brew --prefix)/etc/profile.d/z.sh"
     fi

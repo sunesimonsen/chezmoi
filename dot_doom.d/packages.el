@@ -55,3 +55,5 @@
 (package! denote)
 (package! cheat-sh)
 (package! chatgpt-shell)
+(package! go-impl)
+(package! evil-string-inflection)

@@ -99,6 +99,10 @@
 (setq mac-right-option-modifier 'meta)
 (setq ns-right-option-modifier  'meta)
 
+;; Hack to fix titlebar
+(add-hook 'doom-after-init-hook
+          (lambda () (tool-bar-mode 1) (tool-bar-mode 0)))
+
 ;; Evil
 (setq
  evil-snipe-scope 'whole-visible
@@ -261,7 +265,7 @@
   (setq denote-known-keywords '(zendesk project tools js gtd))
 
   (setq denote-inbox-file
-        (concat denote-directory "20231228T091750--inbox__gtd.org"))
+        (concat denote-directory "20231228T091750--inbox__gtd_star.org"))
   ;;(directory-files denote-directory)
   ;;
   (defun denote-find ()
@@ -277,14 +281,14 @@
                              (find-file denote-inbox-file))
          :desc "New" "n" #'denote
          :desc "Find" "f" #'denote-find
-         (:prefix-map ("r" . "rename")
+         (:prefix-map ("r" . "Rename")
           :desc "Using front matter" "f" #'denote-rename-file-using-front-matter)
-         (:prefix-map ("l" . "link")
+         (:prefix-map ("l" . "Link")
           :desc "Insert" "l" #'denote-insert-link
           :desc "Insert (REGEX)" "r" #'denote-link-insert-links-matching-regexp)
-         (:prefix-map ("k" . "add")
-          :desc "Keywords" "a" #'denote-keywords-add
-          :desc "Keywords" "r" #'denote-keywords-remove))))
+         (:prefix-map ("k" . "Keyword")
+          :desc "Add" "a" #'denote-keywords-add
+          :desc "Remove" "r" #'denote-keywords-remove))))
 
 
 (use-package! ispell
