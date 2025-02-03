@@ -219,6 +219,9 @@
               ("spec.rb" "rb")
               ("rb" "spec.rb")))
 
+
+  (map! :leader :nm "pt" #'projectile-run-vterm)
+
   ;; re-index with projectile-discover-projects-in-search-path
   (setq projectile-project-search-path '(("~/Code" . 2))))
 
@@ -306,8 +309,10 @@
   (use-package! vterm
     :init
     (setq vterm-runner-commands
-          '(("run:guide-client" "~/Code/zendesk/guide-client" "yarn start\n")
-            ("run:markup-editor" "~/Code/zendesk/guide-client/packages/guide-client-markup-editor" "yarn watch\n")))
+          '(("guide-client:start" "~/Code/zendesk/guide-client" "yarn start\n")
+            ("guide-client:markup-editor:watch" "~/Code/zendesk/guide-client/packages/guide-client-markup-editor" "yarn watch\n")
+            ("guide-client:storybook:start" "~/Code/zendesk/guide-client" "yarn storybook:start\n")
+            ("guide-client:markup-editor:start" "~/Code/zendesk/guide-client/packages/guide-client-markup-editor" "yarn start\n")))
 
     (let* ((app-dir "~/Code/zendesk/guide-client/apps")
            (apps (directory-files app-dir)))
@@ -315,7 +320,7 @@
       (dolist (app apps)
         (unless (member app '("." ".."))
           (push
-           (list (concat "run:" app) (concat app-dir "/" app) "yarn start\n")
+           (list (concat "guide-client:" app ":start") (concat app-dir "/" app) "yarn start\n")
            vterm-runner-commands))))
 
     (defun vterm-runner-run ()
@@ -349,3 +354,28 @@
           (lambda ()
             (let ((auth (car (auth-source-search :host "ai-gateway.zende.sk" :requires '(secret)))))
               (funcall (plist-get auth :secret)))))))
+
+;; Make Eglot faster
+(after! jsonrpc
+  (fset #'jsonrpc--log-event #'ignore))
+
+(after! eglot
+  (setq eglot-ignored-server-capabilities
+        '(:colorProvider
+          :documentHighlightProvider
+          :foldingRangeProvider)))
+
+(add-hook
+ 'eglot-managed-mode-hook
+ (lambda ()
+   ;; we want eglot to setup callbacks from eldoc, but we don't want eldoc
+   ;; running after every command. As a workaround, we disable it after we just
+   ;; enabled it. Now calling `M-x eldoc` will put the help we want in the eldoc
+   ;; buffer. Alternatively we could tell eglot to stay out of eldoc, and add
+   ;; the hooks manually, but that seems fragile to updates in eglot.
+   (eldoc-mode -1)
+   ))
+
+(after! eldoc
+  (setq eldoc-echo-area-prefer-doc-buffer t)
+  (map! :leader :nm "h." #'eldoc))
