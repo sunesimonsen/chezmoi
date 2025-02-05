@@ -692,45 +692,6 @@ require('lazy').setup({
     },
   },
 
-  {
-    'L3MON4D3/LuaSnip',
-    build = (function()
-      -- Build Step is needed for regex support in snippets.
-      -- This step is not supported in many windows environments.
-      -- Remove the below condition to re-enable on windows.
-      if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
-        return
-      end
-      return 'make install_jsregexp'
-    end)(),
-    config = function()
-      local ls = require 'luasnip'
-      ls.config.setup {}
-
-      -- Think of <c-l> as moving to the right of your snippet expansion.
-      --  So if you have a snippet that's like:
-      --  function $name($args)
-      --    $body
-      --  end
-      --
-      -- <c-l> will move you to the right of each of the expansion locations.
-      -- <c-h> is similar, except moving you backwards.
-
-      vim.keymap.set({ 'i', 's' }, '<C-l>', ls.expand_or_jump, { desc = 'Expand snippet or jump' })
-      vim.keymap.set({ 'i', 's' }, '<C-h>', function()
-        if ls.locally_jumpable(-1) then
-          ls.jump(-1)
-        end
-      end, { desc = 'Snippet jump backwards' })
-
-      require('luasnip.loaders.from_vscode').load {
-        paths = './my_snippets',
-      }
-      -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-      --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-    end,
-  },
-
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -832,6 +793,19 @@ require('lazy').setup({
       -- - sd'   - Surround Delete [']quotes
       -- - sr)'  - Surround Replace [)] [']
       require('mini.surround').setup()
+
+      -- Snippets
+      local gen_loader = require('mini.snippets').gen_loader
+      require('mini.snippets').setup {
+        snippets = {
+          -- Load custom file with global snippets first (adjust for Windows)
+          gen_loader.from_file '~/.config/nvim/snippets/global.json',
+
+          -- Load snippets based on current language by reading files from
+          -- "snippets/" subdirectories from 'runtimepath' directories.
+          gen_loader.from_lang(),
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
