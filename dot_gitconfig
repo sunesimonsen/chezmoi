@@ -11,6 +11,7 @@
     ci = commit
     br = branch
     pr = pull --rebase
+    pf = push --force-with-lease
     sta = stash
     cdiff = diff --cached
     hist = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'

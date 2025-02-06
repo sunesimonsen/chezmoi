@@ -70,6 +70,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 3
 
+-- vim.opt.wildmode = 'list'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -355,6 +357,15 @@ require('lazy').setup({
             require('telescope.themes').get_dropdown(),
           },
         },
+
+        defaults = {
+          layout_config = {
+            horizontal = {
+              width = 0.95,
+              height = 0.95,
+            },
+          },
+        },
       }
 
       -- Enable Telescope extensions if they are installed
@@ -364,15 +375,19 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
-      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
-      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search by Grep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
-      vim.keymap.set('n', "<leader>s'", builtin.resume, { desc = 'Search Resume' })
-      vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search Recent Files' })
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
+      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search files' })
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current word' })
+      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Search with grep' })
+      vim.keymap.set('n', '<leader>se', builtin.diagnostics, { desc = 'Search errors' })
+      vim.keymap.set('n', "<leader>s'", builtin.resume, { desc = 'Search resume' })
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.find_files { cwd = require('telescope.utils').buffer_dir() }
+      end, { desc = 'Search Neovim files' })
+
       vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing buffers' })
+      vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search recent files' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>ss', function()
@@ -677,7 +692,7 @@ require('lazy').setup({
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -688,6 +703,7 @@ require('lazy').setup({
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -860,9 +876,16 @@ require('lazy').setup({
     opts = { modes = { search = { enabled = true } } },
     -- stylua: ignore
     keys = {
-       { "gt", mode = { "n" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+ --      { "gt", mode = { "n" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
+
+  -- Make I/A work as they are suppose to.
+  { 'kana/vim-niceblock' },
+
+  -- Git stuff
+  { 'tpope/vim-fugitive' },
+
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -878,6 +901,10 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
+  -- concurrency = 1,
+  -- checker = {
+  --   concurrency = 1
+  -- },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

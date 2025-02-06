@@ -8,5 +8,15 @@
     "prefix": "log",
     "body": ["console.log($1)$0"],
     "description": "Log statement"
+  },
+  "Function statement": {
+    "prefix": "fun",
+    "body": ["const $1 = ($2) => {", "  $0", "}"],
+    "description": "Function statement"
+  },
+  "Function": {
+    "prefix": "fn",
+    "body": ["($1) => {", "  $0", "}"],
+    "description": "Function"
   }
 }
