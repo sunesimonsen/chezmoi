@@ -94,6 +94,8 @@ return {
       vim.keymap.set('n', '<leader>hs', builtin.help_tags, { desc = 'Search help' })
       vim.keymap.set('n', '<leader>hk', builtin.keymaps, { desc = 'Search keymaps' })
 
+      vim.keymap.set('n', '<leader>sr', builtin.registers, { desc = 'Search registers' })
+
       vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = 'Search current word' })
       vim.keymap.set('n', "<leader>s'", builtin.resume, { desc = 'Search resume' })
 
@@ -108,6 +110,8 @@ return {
           cwd = require('telescope.utils').buffer_dir(),
         }
       end, { desc = 'Search with grep (dir)' })
+
+      vim.keymap.set('n', '<leader>se', builtin.commands, { desc = 'Search commands' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>ss', function()
@@ -130,7 +134,10 @@ return {
       end, { desc = 'Search Git files' })
 
       vim.keymap.set('n', '<leader>fd', function()
-        require('telescope').extensions.file_browser.file_browser { path = '%:p:h' }
+        require('telescope').extensions.file_browser.file_browser {
+          path = '%:p:h',
+          select_buffer = true,
+        }
       end, { desc = 'Browse' })
 
       vim.keymap.set('n', '<leader>pp', function()
@@ -153,6 +160,18 @@ return {
 
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search Git branches' })
       vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Search Git status' })
+
+      -- Notes
+      vim.keymap.set('n', '<leader>fn', function()
+        builtin.find_files { cwd = '/Users/ssimonsen/Library/CloudStorage/Dropbox/org/denote' }
+      end, { desc = 'Search note files' })
+
+      -- Search notes
+      vim.keymap.set('n', '<leader>sn', function()
+        builtin.live_grep {
+          cwd = '/Users/ssimonsen/Library/CloudStorage/Dropbox/org/denote',
+        }
+      end, { desc = 'Search notes' })
     end,
   },
 }
