@@ -154,8 +154,12 @@ return {
       end, { desc = 'Search buffers' })
 
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>vs', function()
+      vim.keymap.set('n', '<leader>vf', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
+      end, { desc = 'Search Neovim files' })
+
+      vim.keymap.set('n', '<leader>vs', function()
+        builtin.live_grep { cwd = vim.fn.stdpath 'config' }
       end, { desc = 'Search Neovim files' })
 
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search Git branches' })
