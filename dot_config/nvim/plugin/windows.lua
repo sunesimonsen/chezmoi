@@ -9,3 +9,8 @@ vim.keymap.set('n', '<leader>ww', '<C-w>w', { desc = 'Switch' })
 vim.keymap.set('n', '<leader>wc', '<C-w>c', { desc = 'Close' })
 vim.keymap.set('n', '<leader>ws', '<C-w>s', { desc = 'Split' })
 vim.keymap.set('n', '<leader>wv', '<C-w>v', { desc = 'Split vertical' })
+vim.keymap.set('n', '<leader>wp', '<C-w>p', { desc = 'Previous window' })
+
+for i = 1, 9 do
+  vim.keymap.set('n', '<leader>' .. i, i .. '<C-w>w', { desc = 'Window ' .. i })
+end

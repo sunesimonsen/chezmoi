@@ -45,6 +45,17 @@ return {
 
       -- Document existing key chains
       spec = {
+        -- Hide the window commands
+        { '<leader>1', hidden = true },
+        { '<leader>2', hidden = true },
+        { '<leader>3', hidden = true },
+        { '<leader>4', hidden = true },
+        { '<leader>5', hidden = true },
+        { '<leader>6', hidden = true },
+        { '<leader>7', hidden = true },
+        { '<leader>8', hidden = true },
+        { '<leader>9', hidden = true },
+
         { '<leader>b', group = 'Buffers' },
         { '<leader>c', group = 'Code' },
         { '<leader>d', group = 'Diagnostic' },
@@ -53,7 +64,7 @@ return {
         { '<leader>o', group = 'Open' },
         { '<leader>p', group = 'Projects' },
         { '<leader>s', group = 'Search' },
-        { '<leader>t', group = 'Toggle' },
+        { '<leader>t', group = 'Tabs' },
         { '<leader>v', group = 'Vim' },
         { '<leader>w', group = 'Windows' },
         { '<leader>h', group = 'Help' },

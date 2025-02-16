@@ -91,18 +91,18 @@ return {
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
 
-      vim.keymap.set('n', '<leader>hs', builtin.help_tags, { desc = 'Search help' })
-      vim.keymap.set('n', '<leader>hk', builtin.keymaps, { desc = 'Search keymaps' })
-
       vim.keymap.set('n', '<leader>sr', builtin.registers, { desc = 'Search registers' })
 
       vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = 'Search current word' })
-      vim.keymap.set('n', "<leader>s'", builtin.resume, { desc = 'Search resume' })
+      vim.keymap.set('n', "<leader>'", builtin.resume, { desc = 'Search resume' })
 
       vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing buffers' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search recent files' })
 
       vim.keymap.set('n', '<leader>ds', builtin.diagnostics, { desc = 'Search dianostics' })
+
+      vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
+      vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
 
       vim.keymap.set('n', '<leader>sp', builtin.live_grep, { desc = 'Search with grep' })
       vim.keymap.set('n', '<leader>sd', function()
@@ -111,7 +111,7 @@ return {
         }
       end, { desc = 'Search with grep (dir)' })
 
-      vim.keymap.set('n', '<leader>se', builtin.commands, { desc = 'Search commands' })
+      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Search commands' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>ss', function()
