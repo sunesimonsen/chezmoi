@@ -6,8 +6,13 @@
   },
   "Log statement": {
     "prefix": "log",
-    "body": ["console.log($1)$0"],
+    "body": ["console.log($0)"],
     "description": "Log statement"
+  },
+  "Log variable": {
+    "prefix": "logv",
+    "body": ["console.log(\"$1\", $1)"],
+    "description": "Log variable"
   },
   "Function statement": {
     "prefix": "fun",
@@ -18,5 +23,15 @@
     "prefix": "fn",
     "body": ["($1) => {", "  $0", "}"],
     "description": "Function"
+  },
+  "Describe": {
+    "prefix": "describe",
+    "body": ["describe(\"$1\", () => {", "  $0", "})"],
+    "description": "Describe block"
+  },
+  "It": {
+    "prefix": "it",
+    "body": ["it(\"$1\", () => {", "  $0", "})"],
+    "description": "It block"
   }
 }

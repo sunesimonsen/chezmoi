@@ -10,13 +10,6 @@ return {
       --  - ci'  - Change Inside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - Surround Add Inner Word [)]Paren
-      -- - sd'   - Surround Delete [']quotes
-      -- - sr)'  - Surround Replace [)] [']
-      require('mini.surround').setup()
-
       -- Snippets
       local gen_loader = require('mini.snippets').gen_loader
       require('mini.snippets').setup {
@@ -27,6 +20,14 @@ return {
           -- Load snippets based on current language by reading files from
           -- "snippets/" subdirectories from 'runtimepath' directories.
           gen_loader.from_lang(),
+        },
+      }
+
+      require('mini.completion').setup {
+        delay = {
+          completion = 10 ^ 10,
+          info = 500,
+          signature = 500,
         },
       }
 

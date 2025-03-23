@@ -28,9 +28,9 @@ return {
         'ahmedkhalf/project.nvim',
         config = function()
           require('project_nvim').setup {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
+            detection_methods = { 'pattern' },
+            patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '.project' },
+            scope_chdir = 'tab',
           }
         end,
       },
@@ -99,7 +99,7 @@ return {
       vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing buffers' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search recent files' })
 
-      vim.keymap.set('n', '<leader>ds', builtin.diagnostics, { desc = 'Search dianostics' })
+      vim.keymap.set('n', '<leader>es', builtin.diagnostics, { desc = 'Search dianostics' })
 
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
@@ -112,6 +112,8 @@ return {
       end, { desc = 'Search with grep (dir)' })
 
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Search commands' })
+
+      vim.keymap.set('n', '<leader>qs', builtin.quickfix, { desc = 'Search quickfixes' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>ss', function()
@@ -126,6 +128,20 @@ return {
           cwd = require('project_nvim.project').find_pattern_root(),
         }
       end, { desc = 'Search project files' })
+
+      vim.keymap.set('n', '<leader>tf', function()
+        vim.cmd 'tabnew %'
+        builtin.find_files {
+          cwd = require('project_nvim.project').find_pattern_root(),
+        }
+      end, { desc = 'Tab search project files' })
+
+      vim.keymap.set('n', '<leader>ts', function()
+        vim.cmd 'tabnew %'
+        builtin.live_grep {
+          cwd = require('project_nvim.project').find_pattern_root(),
+        }
+      end, { desc = 'Tab search project files' })
 
       vim.keymap.set('n', '<leader>fg', function()
         builtin.git_files {
@@ -143,6 +159,11 @@ return {
       vim.keymap.set('n', '<leader>pp', function()
         require('telescope').extensions.projects.projects {}
       end, { desc = 'Search projects' })
+
+      vim.keymap.set('n', '<leader>tp', function()
+        vim.cmd 'tabnew %'
+        require('telescope').extensions.projects.projects {}
+      end, { desc = 'Tab search projects' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -165,17 +186,77 @@ return {
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search Git branches' })
       vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Search Git status' })
 
+      local notes_dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted'
       -- Notes
-      vim.keymap.set('n', '<leader>fn', function()
-        builtin.find_files { cwd = '/Users/ssimonsen/Library/CloudStorage/Dropbox/org/denote' }
-      end, { desc = 'Search note files' })
+      vim.keymap.set('n', '<leader>nn', function()
+        local actions = require 'telescope.actions'
+        local action_state = require 'telescope.actions.state'
+
+        local function run_selection(prompt_bufnr)
+          actions.select_default:replace(function()
+            actions.close(prompt_bufnr)
+            local selection = action_state.get_selected_entry()
+
+            if selection then
+              vim.cmd('e ' .. notes_dir .. '/' .. selection[1])
+            else
+              local timestamp = os.date('!%Y%m%dT%H%M%S', os.time())
+
+              local title = action_state.get_current_line()
+
+              title = title:lower()
+              title = title:gsub(' ', '-')
+              title = title:gsub('-+', '-')
+              title = title:gsub('[^-0-9a-zæøå]', '')
+
+              local filename = timestamp .. '--' .. title .. '.md'
+              vim.cmd('e ' .. notes_dir .. '/' .. filename)
+            end
+          end)
+          return true
+        end
+
+        builtin.find_files {
+          cwd = notes_dir,
+          attach_mappings = run_selection,
+        }
+      end, { desc = 'Find note' })
 
       -- Search notes
-      vim.keymap.set('n', '<leader>sn', function()
-        builtin.live_grep {
-          cwd = '/Users/ssimonsen/Library/CloudStorage/Dropbox/org/denote',
-        }
+      vim.keymap.set('n', '<leader>ns', function()
+        builtin.live_grep { cwd = notes_dir }
       end, { desc = 'Search notes' })
+
+      -- Link notes
+      vim.keymap.set('n', '<leader>nl', function()
+        local actions = require 'telescope.actions'
+        local action_state = require 'telescope.actions.state'
+
+        local function run_selection(prompt_bufnr)
+          actions.select_default:replace(function()
+            local selection = action_state.get_selected_entry()
+
+            if selection then
+              actions.close(prompt_bufnr)
+
+              local filename = selection[1]
+              local id = filename:sub(1, 15)
+              local title_end = filename:find('[_.]', 18)
+              local title = filename:sub(18, title_end - 1):gsub('-', ' ')
+
+              vim.api.nvim_put({ '[' .. title .. '](' .. id .. '.id)' }, 'c', true, true)
+            else
+              print 'No file selected'
+            end
+          end)
+          return true
+        end
+
+        builtin.find_files {
+          cwd = notes_dir,
+          attach_mappings = run_selection,
+        }
+      end, { desc = 'Link to note' })
     end,
   },
 }

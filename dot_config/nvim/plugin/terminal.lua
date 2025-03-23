@@ -7,6 +7,16 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+vim.api.nvim_create_autocmd('TermClose', {
+  desc = 'Cleanup existed terms',
+  group = vim.api.nvim_create_augroup('custom-terminal-process-exit', { clear = true }),
+  callback = function()
+    vim.schedule(function()
+      vim.cmd 'bdelete'
+    end)
+  end,
+})
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.

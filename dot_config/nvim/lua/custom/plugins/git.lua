@@ -16,11 +16,4 @@ return {
       },
     },
   },
-
-  {
-    'tpope/vim-fugitive',
-    config = function()
-      vim.keymap.set('n', '<leader>gg', ':G<CR>', { desc = 'Git status' })
-    end,
-  },
 }
