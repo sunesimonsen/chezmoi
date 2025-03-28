@@ -379,3 +379,45 @@
 (after! eldoc
   (setq eldoc-echo-area-prefer-doc-buffer t)
   (map! :leader :nm "h." #'eldoc))
+
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (setq treesit-auto-recipe-list
+        `(,(make-treesit-auto-recipe
+            :lang 'typescript
+            :ts-mode 'typescript-ts-mode
+            :remap 'typescript-mode
+            :requires 'tsx
+            :url "https://github.com/tree-sitter/tree-sitter-typescript"
+            :revision "v0.20.3"
+            :source-dir "typescript/src"
+            :ext "\\.ts\\'")
+          ,(make-treesit-auto-recipe
+            :lang 'tsx
+            :ts-mode 'tsx-ts-mode
+            :remap '(typescript-tsx-mode)
+            :requires 'typescript
+            :url "https://github.com/tree-sitter/tree-sitter-typescript"
+            :revision "v0.20.3"
+            :source-dir "tsx/src"
+            :ext "\\.tsx\\'")))
+
+  ;;  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+(use-package typescript-ts-mode
+  :mode (("\\.tsx?\\'" . tsx-ts-mode)
+         ("\\.jsx?\\'" . tsx-ts-mode)))
+
+(use-package eglot
+  :hook
+  ((js-ts-mode . eglot-ensure)
+   (tsx-ts-mode . eglot-ensure)
+   (typescript-ts-mode . eglot-ensure)
+   (go-mode . eglot-ensure)
+   (go-ts-mode . eglot-ensure)
+   (go-mod-mode . eglot-ensure)
+   (go-mod-ts-mode . eglot-ensure)))

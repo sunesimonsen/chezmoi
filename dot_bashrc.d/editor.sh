@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-export EDITOR=emacsclient
+export EDITOR=nvim
 
 alias evil="emacsclient"
