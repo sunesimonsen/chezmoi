@@ -15,13 +15,6 @@ local toggle_quickfix = function()
 end
 
 vim.keymap.set('n', '<leader>qq', toggle_quickfix, { desc = 'Toggle quickfix' })
-vim.keymap.set('n', '<leader>qf', ':cfirst<CR>', { desc = 'First quickfix' })
-vim.keymap.set('n', '<leader>qn', ':cnext<CR>', { desc = 'Next quickfix' })
-vim.keymap.set('n', '<leader>qp', ':cprevious<CR>', { desc = 'Previous quickfix' })
-vim.keymap.set('n', '<leader>ql', ':clast<CR>', { desc = 'Last quickfix' })
 vim.keymap.set('n', '<leader>qd', ':cdo ', { desc = 'Quickfix do' })
 vim.keymap.set('n', '<M-j>', ':cnext<CR>', { desc = 'Next quickfix' })
 vim.keymap.set('n', '<M-k>', ':cprevious<CR>', { desc = 'Previous quickfix' })
-
-vim.keymap.set('n', ']q', ':cnext<CR>', { desc = 'Next quickfix' })
-vim.keymap.set('n', '[q', ':cprevious<CR>', { desc = 'Previous quickfix' })

@@ -13,5 +13,5 @@ vim.keymap.set('v', '<C-r>', function()
   -- escape regex and line endings
   pattern = vim.fn.substitute(vim.fn.escape(pattern, '^$.*\\/~[]'), '\n', '\\n', 'g')
   -- send parsed substitution command to command line
-  vim.api.nvim_input('<Esc>:%s/' .. pattern .. '//gc<Left><Left><Left>')
+  vim.api.nvim_input('<Esc>:.,$s/' .. pattern .. '//gc<Left><Left><Left>')
 end)
