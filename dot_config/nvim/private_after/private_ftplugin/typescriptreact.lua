@@ -1,1 +1,1 @@
-require 'snippets.typescriptreact-snippets'
+require('snippets.typescriptreact-snippets').setup()

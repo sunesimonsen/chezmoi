@@ -1,1 +1,1 @@
-require 'snippets.javascript-snippets'
+return require 'snippets.javascript-snippets'

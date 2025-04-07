@@ -12,7 +12,7 @@ function vim.snippet.add(trigger, body)
       vim.api.nvim_feedkeys(trigger .. c, 'i', true)
       return
     end
-    print('wat:' .. c)
+
     vim.snippet.expand(body)
   end, { buffer = 0 })
 end

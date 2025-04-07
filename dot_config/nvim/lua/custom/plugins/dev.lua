@@ -5,32 +5,15 @@ return {
       'nvim-telescope/telescope.nvim',
     },
     config = function()
-      local dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted'
       local notes = require 'notes'
 
-      vim.keymap.set('n', '<leader>nn', function()
-        notes.find_note {
-          dir = dir,
-        }
-      end, { desc = 'Find note' })
+      vim.g.notes_dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted'
 
-      vim.keymap.set('n', '<leader>ns', function()
-        notes.search_notes {
-          dir = dir,
-        }
-      end, { desc = 'Search notes' })
-
-      vim.keymap.set('n', '<leader>nl', function()
-        notes.link_to_note {
-          dir = dir,
-        }
-      end, { desc = 'Link to note' })
-
-      vim.keymap.set('n', '<leader>nt', function()
-        notes.toggle_tag {
-          dir = dir,
-        }
-      end, { desc = 'Toggle tag' })
+      vim.keymap.set('n', '<leader>nn', notes.find_note, { desc = 'Find note' })
+      vim.keymap.set('n', '<leader>ns', notes.search_notes, { desc = 'Search notes' })
+      vim.keymap.set('n', '<leader>nl', notes.link_to_note, { desc = 'Link to note' })
+      vim.keymap.set('n', '<leader>nt', notes.toggle_tag, { desc = 'Toggle tag' })
+      vim.keymap.set('n', '<leader>nr', notes.retitle, { desc = 'Retitle note' })
     end,
   },
 }

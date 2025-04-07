@@ -1,1 +1,1 @@
-require 'snippets.go-snippets'
+require('snippets.go-snippets').setup()

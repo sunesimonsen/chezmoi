@@ -1,1 +1,1 @@
-require 'snippets.typescript-snippets'
+return require 'snippets.typescript-snippets'

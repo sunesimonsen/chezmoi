@@ -1,1 +1,1 @@
-require 'snippets.typescript-snippets'
+require('snippets.typescript-snippets').setup()

@@ -1,1 +1,1 @@
-require 'snippets.javascript-snippets'
+require('snippets.javascript-snippets').setup()

@@ -1,1 +1,1 @@
-require 'snippets.ruby-snippets'
+require('snippets.ruby-snippets').setup()
