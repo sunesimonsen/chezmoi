@@ -25,6 +25,7 @@ return {
         { '<leader>v', group = 'Vim' },
         { '<leader>w', group = 'Windows' },
         { '<leader>x', group = 'Execute' },
+        { '<leader>vo', group = 'Open' },
 
         -- Hide the window switching
         { '<leader>1', hidden = true },

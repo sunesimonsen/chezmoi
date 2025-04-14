@@ -16,3 +16,14 @@ function vim.snippet.add(trigger, body)
     vim.snippet.expand(body)
   end, { buffer = 0 })
 end
+
+--- Opens the snippet file for the current file type
+function vim.snippet.open()
+  local filetype = vim.bo.filetype
+
+  local snippetPath = '~/.config/nvim/lua/snippets/' .. filetype .. '-snippets.lua'
+
+  vim.cmd('e ' .. snippetPath)
+end
+
+vim.keymap.set('n', '<leader>vos', vim.snippet.open, { desc = 'Open snippets' })
