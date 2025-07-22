@@ -1,6 +1,0 @@
-{
-  "If Statement": {
-    "prefix": "if",
-    "body": ["if ${1:condition} {", "  $0", "}"],
-  },
-}
