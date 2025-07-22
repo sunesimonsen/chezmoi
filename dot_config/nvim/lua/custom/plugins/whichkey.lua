@@ -9,6 +9,9 @@ return {
 
       -- Document existing key chains
       spec = {
+        { '<leader>a', group = 'AI' },
+        { '<leader>ac', group = 'Chat' },
+        { '<leader>ar', group = 'Rewrite' },
         { '<leader>b', group = 'Buffers' },
         { '<leader>c', group = 'Code' },
         { '<leader>d', group = 'Directories' },
@@ -20,7 +23,9 @@ return {
         { '<leader>n', group = 'Notes' },
         { '<leader>o', group = 'Open' },
         { '<leader>p', group = 'Projects' },
+        { '<leader>pt', group = 'Tests' },
         { '<leader>q', group = 'Quickfix' },
+        { '<leader>r', group = 'Run' },
         { '<leader>s', group = 'Search' },
         { '<leader>t', group = 'Tabs' },
         { '<leader>v', group = 'Vim' },
