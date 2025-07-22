@@ -40,11 +40,11 @@ return {
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         go = { 'goimports', 'gofmt' },
-        javascript = { 'prettierd' },
-        typescript = { 'prettierd' },
-        javascriptreact = { 'prettierd' },
-        json = { 'prettierd' },
-        css = { 'prettierd' },
+        javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        json = { 'prettier' },
+        css = { 'prettier' },
         -- Use the "*" filetype to run formatters on all filetypes.
         -- ['*'] = { },
         -- Use the "_" filetype to run formatters on filetypes that don't

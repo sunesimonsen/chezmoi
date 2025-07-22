@@ -74,6 +74,14 @@ return {
         },
 
         defaults = {
+          mappings = {
+            i = {
+              ["<C-'>"] = require('telescope.actions.layout').toggle_preview,
+            },
+          },
+          preview = {
+            hide_on_startup = true,
+          },
           layout_config = {
             horizontal = {
               width = 0.95,
@@ -99,7 +107,7 @@ return {
       vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing buffers' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search recent files' })
 
-      vim.keymap.set('n', '<leader>es', builtin.diagnostics, { desc = 'Search dianostics' })
+      vim.keymap.set('n', '<leader>es', builtin.diagnostics, { desc = 'Search diagnostics' })
 
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
@@ -117,10 +125,7 @@ return {
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>ss', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          previewer = false,
-        })
+        builtin.current_buffer_fuzzy_find { previewer = false }
       end, { desc = 'Search buffer' })
 
       vim.keymap.set('n', '<leader>ff', function()
@@ -153,6 +158,8 @@ return {
         require('telescope').extensions.file_browser.file_browser {
           path = '%:p:h',
           select_buffer = true,
+          no_ignore = true,
+          respect_gitignore = false,
         }
       end, { desc = 'Browse' })
 
@@ -185,6 +192,8 @@ return {
 
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search Git branches' })
       vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Search Git status' })
+
+      vim.keymap.set('n', '<leader>yr', builtin.registers, { desc = 'Yarn register' })
     end,
   },
 }

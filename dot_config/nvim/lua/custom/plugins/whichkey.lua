@@ -15,6 +15,7 @@ return {
         { '<leader>e', group = 'Errors' },
         { '<leader>f', group = 'Files' },
         { '<leader>g', group = 'Git' },
+        { '<leader>y', group = 'Yank' },
         { '<leader>h', group = 'Help' },
         { '<leader>n', group = 'Notes' },
         { '<leader>o', group = 'Open' },
