@@ -1,6 +1,6 @@
 return {
   {
-    dir = '~/Code/nvim/killring.nvim',
+    'sunesimonsen/killring.nvim',
     config = function()
       local killring = require 'killring'
       killring.setup()

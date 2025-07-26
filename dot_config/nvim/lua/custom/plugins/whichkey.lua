@@ -33,6 +33,8 @@ return {
         { '<leader>x', group = 'Execute' },
         { '<leader>vo', group = 'Open' },
 
+        { 'gr', group = 'LSP' },
+
         -- Hide the window switching
         { '<leader>1', hidden = true },
         { '<leader>2', hidden = true },
@@ -49,7 +51,8 @@ return {
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
-        -- If you are using a Nerd Font: set icons.keys to an empty table which will use the
+        -- If you are using a Nerd Font: set icons.keys to an empty table which
+        -- will use the
         -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
         keys = {},
       },
