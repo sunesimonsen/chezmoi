@@ -1,10 +1,7 @@
 return {
-  {
-    'sunesimonsen/killring.nvim',
-    config = function()
-      local killring = require 'killring'
-      killring.setup()
-      vim.keymap.set('n', '<leader>yy', ':KillRing<cr>', { desc = 'Paste from killring' })
-    end,
+  'sunesimonsen/killring.nvim',
+  opts = {},
+  keys = {
+    { '<leader>yy', ':KillRing<CR>', desc = 'Paste from killring', mode = { 'n' } },
   },
 }

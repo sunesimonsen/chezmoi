@@ -1,15 +1,13 @@
 return {
   'robitx/gp.nvim',
-  config = function()
-    require('gp').setup {
-      openai_api_key = os.getenv 'OPENAI_API_KEY',
-      providers = {
-        openai = {
-          endpoint = os.getenv 'OPENAI_BASE_URL' .. '/chat/completions',
-        },
+  opts = {
+    openai_api_key = os.getenv 'OPENAI_API_KEY',
+    providers = {
+      openai = {
+        endpoint = os.getenv 'OPENAI_BASE_URL' .. '/chat/completions',
       },
-    }
-  end,
+    },
+  },
   keys = {
     { '<leader>ar', ':GpRewrite<CR>', desc = 'Rewrite', mode = { 'v' } },
     { '<leader>arb', ':%GpRewrite<CR>', desc = 'Rewrite buffer', mode = { 'n' } },
