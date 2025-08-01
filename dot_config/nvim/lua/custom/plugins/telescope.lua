@@ -65,10 +65,13 @@ return {
       --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
       --   },
       -- },
-      -- pickers = {}
+      -- pickers = { },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
+        },
+        fzf = {
+          fuzzy = false,
         },
       },
 
@@ -129,6 +132,7 @@ return {
 
     vim.keymap.set('n', '<leader>ff', function()
       builtin.find_files {
+        find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
         cwd = require('project_nvim.project').find_pattern_root(),
       }
     end, { desc = 'Search project files' })
