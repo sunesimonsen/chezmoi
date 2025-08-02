@@ -1,3 +1,18 @@
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Enable break indent
+vim.opt.breakindent = true
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
 -- get contents of visual selection
 -- handle unpack deprecation
 table.unpack = table.unpack or unpack
