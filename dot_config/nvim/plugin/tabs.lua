@@ -15,7 +15,7 @@ end
 local runInTerminal = function(path, command)
   vim.cmd 'tabnew'
   if path ~= nil then
-    vim.cmd('lcd ' .. path)
+    vim.cmd('tcd ' .. path)
     vim.cmd('term cd ' .. path .. '; ' .. command)
   else
     vim.cmd 'term'
@@ -52,7 +52,7 @@ local openTabInBufDir = function()
 
   vim.cmd 'tabnew'
   if path then
-    vim.cmd('lcd ' .. path)
+    vim.cmd('tcd ' .. path)
   end
 end
 
@@ -63,7 +63,7 @@ local openDirBrowser = function()
 
   vim.cmd 'tabnew'
   if path then
-    vim.cmd('lcd ' .. path)
+    vim.cmd('tcd ' .. path)
   end
   vim.cmd 'Oil'
 end
