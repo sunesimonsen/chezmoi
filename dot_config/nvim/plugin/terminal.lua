@@ -1,18 +1,18 @@
-vim.api.nvim_create_autocmd("TermOpen", {
-  desc = "Configure new terminals",
-  group = vim.api.nvim_create_augroup("custom-terminal-open", { clear = true }),
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Configure new terminals',
+  group = vim.api.nvim_create_augroup('custom-terminal-open', { clear = true }),
   callback = function()
     vim.opt.number = false
     vim.opt.relativenumber = false
   end,
 })
 
-vim.api.nvim_create_autocmd("TermClose", {
-  desc = "Cleanup existed terms",
-  group = vim.api.nvim_create_augroup("custom-terminal-process-exit", { clear = true }),
+vim.api.nvim_create_autocmd('TermClose', {
+  desc = 'Cleanup existed terms',
+  group = vim.api.nvim_create_augroup('custom-terminal-process-exit', { clear = true }),
   callback = function()
     vim.schedule(function()
-      vim.cmd("bdelete")
+      vim.cmd 'bdelete'
     end)
   end,
 })
@@ -23,5 +23,5 @@ vim.api.nvim_create_autocmd("TermClose", {
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("t", "<C-[><C-[>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-[><C-[>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

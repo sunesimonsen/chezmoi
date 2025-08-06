@@ -1,8 +1,8 @@
-local deps = require("custom.deps")
-deps.add("tpope/vim-sleuth")
-deps.add("stevearc/conform.nvim")
+local deps = require 'custom.deps'
+deps.add 'tpope/vim-sleuth'
+deps.add 'stevearc/conform.nvim'
 
-require("conform").setup({
+require('conform').setup {
   notify_on_error = false,
   format_on_save = function(bufnr)
     -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -11,9 +11,9 @@ require("conform").setup({
     local disable_filetypes = { c = true, cpp = true }
     local lsp_format_opt
     if disable_filetypes[vim.bo[bufnr].filetype] then
-      lsp_format_opt = "never"
+      lsp_format_opt = 'never'
     else
-      lsp_format_opt = "fallback"
+      lsp_format_opt = 'fallback'
     end
     return {
       timeout_ms = 1000,
@@ -21,25 +21,25 @@ require("conform").setup({
     }
   end,
   formatters_by_ft = {
-    lua = { "stylua" },
+    lua = { 'stylua' },
     -- Conform can also run multiple formatters sequentially
     -- python = { "isort", "black" },
     --
     -- You can use 'stop_after_first' to run the first available formatter from the list
-    go = { "goimports", "gofmt" },
-    javascript = { "prettier" },
-    typescript = { "prettier" },
-    javascriptreact = { "prettier" },
-    json = { "prettier" },
-    css = { "prettier" },
+    go = { 'goimports', 'gofmt' },
+    javascript = { 'prettier' },
+    typescript = { 'prettier' },
+    javascriptreact = { 'prettier' },
+    json = { 'prettier' },
+    css = { 'prettier' },
     -- Use the "*" filetype to run formatters on all filetypes.
     -- ['*'] = { },
     -- Use the "_" filetype to run formatters on filetypes that don't
     -- have other formatters configured.
-    ["_"] = { "trim_whitespace" },
+    ['_'] = { 'trim_whitespace' },
   },
-})
+}
 
-vim.keymap.set("n", "<leader>bf", function()
-  require("conform").format({ async = true, lsp_format = "fallback" })
-end, { desc = "Format buffer" })
+vim.keymap.set('n', '<leader>bf', function()
+  require('conform').format { async = true, lsp_format = 'fallback' }
+end, { desc = 'Format buffer' })

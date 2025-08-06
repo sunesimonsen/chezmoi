@@ -1,21 +1,21 @@
-local deps = require("custom.deps")
+local deps = require 'custom.deps'
 
-deps.add("lewis6991/gitsigns.nvim")
+deps.add 'lewis6991/gitsigns.nvim'
 
-require("gitsigns").setup({
+require('gitsigns').setup {
   signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
   },
-})
+}
 
-deps.add("echasnovski/mini.statusline")
-require("mini.statusline").setup({
+deps.add 'echasnovski/mini.statusline'
+require('mini.statusline').setup {
   use_icons = vim.g.have_nerd_font,
-})
+}
 
 -- Make line numbers default
 vim.opt.number = false
@@ -27,7 +27,7 @@ vim.opt.relativenumber = false
 vim.opt.showmode = false
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -40,14 +40,14 @@ vim.opt.scrolloff = 3
 vim.opt.cursorline = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("custom-highlight-yank", { clear = true }),
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('custom-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,

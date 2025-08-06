@@ -7,7 +7,7 @@ end
 
 deps.add {
   source = 'nvim-treesitter/nvim-treesitter',
-  checkout = 'master',
+  checkout = 'main',
   monitor = 'main',
   hooks = {
     post_install = post_tree_sitter,
@@ -15,39 +15,43 @@ deps.add {
   },
 }
 
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'bash',
-    'c',
-    'diff',
-    'html',
-    'lua',
-    'luadoc',
-    'markdown',
-    'markdown_inline',
-    'query',
-    'vim',
-    'vimdoc',
-  },
-  -- Autoinstall languages that are not installed
-  auto_install = true,
-  highlight = {
-    enable = true,
-    -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-    --  If you are experiencing weird indenting issues, add the language to
-    --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-    additional_vim_regex_highlighting = { 'ruby' },
-  },
-  indent = { enable = true, disable = { 'ruby' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<CR>',
-      node_incremental = '<CR>',
-      node_decremental = '<S-CR>',
-    },
-  },
-}
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  callback = function(event)
+    local bufnr = event.buf
+    local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+
+    -- Skip if no filetype
+    if filetype == '' then
+      return
+    end
+
+    -- Get parser name based on filetype
+    local parser_name = vim.treesitter.language.get_lang(filetype) -- might return filetype (not helpful)
+    if not parser_name then
+      return
+    end
+    -- Try to get existing parser (helpful check if filetype was returned above)
+    local parser_configs = require 'nvim-treesitter.parsers'
+    if not parser_configs[parser_name] then
+      return -- Parser not available, skip silently
+    end
+
+    local parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
+
+    if not parser_installed then
+      -- If not installed, install parser synchronously
+      require('nvim-treesitter').install({ parser_name }):wait(30000)
+    end
+
+    -- let's check again
+    parser_installed = pcall(vim.treesitter.get_parser, bufnr, parser_name)
+
+    if parser_installed then
+      -- Start treesitter for this buffer
+      vim.treesitter.start(bufnr, parser_name)
+    end
+  end,
+})
 
 deps.add 'echasnovski/mini.ai'
 

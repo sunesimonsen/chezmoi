@@ -1,11 +1,11 @@
-local deps = require("custom.deps")
-deps.add_and_make("artempyanykh/marksman")
-deps.add("williamboman/mason.nvim")
-deps.add("williamboman/mason-lspconfig.nvim")
-deps.add("WhoIsSethDaniel/mason-tool-installer.nvim")
-deps.add("j-hui/fidget.nvim")
-deps.add("artempyanykh/marksman")
-deps.add("neovim/nvim-lspconfig")
+local deps = require 'custom.deps'
+deps.add_and_make 'artempyanykh/marksman'
+deps.add 'williamboman/mason.nvim'
+deps.add 'williamboman/mason-lspconfig.nvim'
+deps.add 'WhoIsSethDaniel/mason-tool-installer.nvim'
+deps.add 'j-hui/fidget.nvim'
+deps.add 'artempyanykh/marksman'
+deps.add 'neovim/nvim-lspconfig'
 
 -- Brief aside: **What is LSP?**
 --
@@ -36,8 +36,8 @@ deps.add("neovim/nvim-lspconfig")
 --    That is to say, every time a new file is opened that is associated with
 --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
 --    function will be executed to configure the current buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
     -- NOTE: Remember that Lua is a real programming language, and as such it is possible
     -- to define small helper and utility functions so you don't have to repeat yourself.
@@ -45,41 +45,41 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- In this case, we create a function that lets us more easily define mappings specific
     -- for LSP related items. It sets the mode, buffer and description for us each time.
     local map = function(keys, func, desc, mode)
-      mode = mode or "n"
-      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
 
     -- Jump to the definition of the word under your cursor.
     --  This is where a variable was first declared, or where a function is defined, etc.
     --  To jump back, press <C-t>.
-    map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+    map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
 
     -- Find references for the word under your cursor.
-    map("grr", require("telescope.builtin").lsp_references, "Goto References")
+    map('grr', require('telescope.builtin').lsp_references, 'Goto References')
 
     -- Jump to the implementation of the word under your cursor.
     --  Useful when your language has ways of declaring types without an actual implementation.
-    map("gri", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+    map('gri', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
 
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
-    map("<leader>ct", require("telescope.builtin").lsp_type_definitions, "Type Definition")
+    map('<leader>ct', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-    map("<leader>cc", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+    map('gO', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
+    map('<leader>cc', require('telescope.builtin').lsp_document_symbols, 'Document Symbols')
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map("<leader>cw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+    map('<leader>cw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
     -- WARN: This is not Goto Definition, this is Goto Declaration.
     --  For example, in C this would take you to the header.
-    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+    map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
-    map("<leader>ee", ":lua vim.diagnostic.open_float()<CR>", "Show dianostics")
+    map('<leader>ee', ':lua vim.diagnostic.open_float()<CR>', 'Show dianostics')
   end,
 })
 
@@ -124,10 +124,10 @@ local servers = {
     settings = {
       Lua = {
         completion = {
-          callSnippet = "Replace",
+          callSnippet = 'Replace',
         },
         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        diagnostics = { disable = { "missing-fields" } },
+        diagnostics = { disable = { 'missing-fields' } },
       },
     },
   },
@@ -149,18 +149,18 @@ local servers = {
 local ensure_installed = vim.tbl_keys(servers or {})
 
 vim.list_extend(ensure_installed, {
-  "stylua", -- Used to format Lua code
+  'stylua', -- Used to format Lua code
 })
 
-require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-require("mason").setup()
-require("fidget").setup({})
+require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+require('mason').setup()
+require('fidget').setup {}
 
-require("mason-lspconfig").setup({
+require('mason-lspconfig').setup {
   handlers = {
     function(server_name)
       local server = servers[server_name] or {}
-      require("lspconfig")[server_name].setup(server)
+      require('lspconfig')[server_name].setup(server)
     end,
   },
-})
+}
