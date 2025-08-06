@@ -49,16 +49,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-deps.add 'nvim-treesitter/nvim-treesitter-textobjects'
 deps.add 'echasnovski/mini.ai'
 
-local spec_treesitter = require('mini.ai').gen_spec.treesitter
-require('mini.ai').setup {
-  custom_textobjects = {
-    F = spec_treesitter { a = '@function.outer', i = '@function.inner' },
-    o = spec_treesitter {
-      a = { '@conditional.outer', '@loop.outer', '@function.outer', '@class.outer' },
-      i = { '@conditional.inner', '@loop.inner' },
-    },
-  },
-}
+require('mini.ai').setup {}
