@@ -1,3 +1,47 @@
+local deps = require 'custom.deps'
+
+deps.add 'echasnovski/mini.completion'
+
+require('mini.completion').setup {
+  delay = {
+    completion = 10 ^ 10,
+    info = 500,
+    signature = 500,
+  },
+  lsp_completion = {
+    snippet_insert = function(snippet)
+      vim.snippet.expand(snippet)
+    end,
+  },
+}
+
+deps.add 'folke/flash.nvim'
+
+require('flash').setup { modes = { search = { enabled = false } } }
+
+vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
+  require('flash').jump()
+end, { desc = 'Flash' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jt', function()
+  require('flash').treesitter()
+end, { desc = 'Flash Treesitter' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>js', function()
+  require('flash').treesitter_search()
+end, { desc = 'Treesitter search' })
+
+deps.add 'kylechui/nvim-surround'
+require('nvim-surround').setup {}
+
+deps.add 'sunesimonsen/killring.nvim'
+
+require('killring').setup {}
+vim.keymap.set('n', '<leader>yy', ':KillRing<CR>', { desc = 'View yank history' })
+
+deps.add 'poljar/typos.nvim'
+require('typos').setup()
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
