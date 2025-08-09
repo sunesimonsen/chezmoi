@@ -23,13 +23,9 @@ vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
   require('flash').jump()
 end, { desc = 'Flash' })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jt', function()
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jj', function()
   require('flash').treesitter()
 end, { desc = 'Flash Treesitter' })
-
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>js', function()
-  require('flash').treesitter_search()
-end, { desc = 'Treesitter search' })
 
 deps.add 'kylechui/nvim-surround'
 require('nvim-surround').setup {}

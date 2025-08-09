@@ -48,21 +48,18 @@ require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'projects'
 pcall(require('telescope').load_extension 'live_grep_args')
 
--- See `:help telescope.builtin`
-local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').registers, { desc = 'Search registers' })
 
-vim.keymap.set('n', '<leader>sr', builtin.registers, { desc = 'Search registers' })
+vim.keymap.set('n', '<leader>*', require('telescope.builtin').grep_string, { desc = 'Search current word' })
+vim.keymap.set('n', "<leader>'", require('telescope.builtin').resume, { desc = 'Search resume' })
 
-vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = 'Search current word' })
-vim.keymap.set('n', "<leader>'", builtin.resume, { desc = 'Search resume' })
+vim.keymap.set('n', '<leader>bb', require('telescope.builtin').buffers, { desc = 'Find existing buffers' })
+vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Search recent files' })
 
-vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = 'Find existing buffers' })
-vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = 'Search recent files' })
+vim.keymap.set('n', '<leader>es', require('telescope.builtin').diagnostics, { desc = 'Search diagnostics' })
 
-vim.keymap.set('n', '<leader>es', builtin.diagnostics, { desc = 'Search diagnostics' })
-
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search help' })
-vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search keymaps' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search help' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = 'Search keymaps' })
 
 vim.keymap.set('n', '<leader>sp', function()
   require('telescope').extensions.live_grep_args.live_grep_args()
@@ -74,15 +71,15 @@ vim.keymap.set('n', '<leader>sd', function()
   }
 end, { desc = 'Search with grep (dir)' })
 
-vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Search commands' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = 'Search commands' })
 
-vim.keymap.set('n', '<leader>qs', builtin.quickfix, { desc = 'Search quickfixes' })
+vim.keymap.set('n', '<leader>qs', require('telescope.builtin').quickfix, { desc = 'Search quickfixes' })
 
 -- Slightly advanced example of overriding default behavior and theme
-vim.keymap.set('n', '<leader>ss', builtin.current_buffer_fuzzy_find, { desc = 'Search buffer' })
+vim.keymap.set('n', '<leader>ss', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Search buffer' })
 
 vim.keymap.set('n', '<leader>ff', function()
-  builtin.find_files {
+  require('telescope.builtin').find_files {
     find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
     cwd = require('project_nvim.project').find_pattern_root(),
   }
@@ -90,20 +87,20 @@ end, { desc = 'Search project files' })
 
 vim.keymap.set('n', '<leader>tf', function()
   vim.cmd 'tabnew %'
-  builtin.find_files {
+  require('telescope.builtin').find_files {
     cwd = require('project_nvim.project').find_pattern_root(),
   }
 end, { desc = 'Tab search project files' })
 
 vim.keymap.set('n', '<leader>ts', function()
   vim.cmd 'tabnew %'
-  builtin.live_grep {
+  require('telescope.builtin').live_grep {
     cwd = require('project_nvim.project').find_pattern_root(),
   }
 end, { desc = 'Tab search project files' })
 
 vim.keymap.set('n', '<leader>fg', function()
-  builtin.git_files {
+  require('telescope.builtin').git_files {
     cwd = require('telescope.utils').buffer_dir(),
   }
 end, { desc = 'Search Git files' })
@@ -129,7 +126,7 @@ end, { desc = 'Tab search projects' })
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set('n', '<leader>sS', function()
-  builtin.live_grep {
+  require('telescope.builtin').live_grep {
     grep_open_files = true,
     prompt_title = 'Live Grep in Open Files',
   }
@@ -137,16 +134,16 @@ end, { desc = 'Search buffers' })
 
 -- Shortcut for searching your Neovim configuration files
 vim.keymap.set('n', '<leader>vf', function()
-  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+  require('telescope.builtin').find_files { cwd = vim.fn.stdpath 'config' }
 end, { desc = 'Search Neovim files' })
 
 vim.keymap.set('n', '<leader>vs', function()
-  builtin.live_grep { cwd = vim.fn.stdpath 'config' }
+  require('telescope.builtin').live_grep { cwd = vim.fn.stdpath 'config' }
 end, { desc = 'Search Neovim files' })
 
-vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search Git branches' })
-vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'Search Git commits' })
-vim.keymap.set('n', '<leader>gl', builtin.git_bcommits, { desc = 'Search file log' })
-vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Search Git status' })
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Search Git branches' })
+vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Search Git commits' })
+vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_bcommits, { desc = 'Search file log' })
+vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Search Git status' })
 
-vim.keymap.set('n', '<leader>yr', builtin.registers, { desc = 'Yarn register' })
+vim.keymap.set('n', '<leader>yr', require('telescope.builtin').registers, { desc = 'Yarn register' })
