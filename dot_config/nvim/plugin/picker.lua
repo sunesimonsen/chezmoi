@@ -1,14 +1,17 @@
 local deps = require 'custom.deps'
 
-deps.add_and_make 'nvim-telescope/telescope-fzf-native.nvim'
-deps.add 'nvim-lua/plenary.nvim'
-deps.add 'nvim-telescope/telescope-fzf-native.nvim'
-deps.add 'nvim-telescope/telescope-ui-select.nvim'
-deps.add 'nvim-telescope/telescope-live-grep-args.nvim'
-deps.add 'nvim-telescope/telescope-file-browser.nvim'
-deps.add 'nvim-tree/nvim-web-devicons'
-deps.add 'ahmedkhalf/project.nvim'
-deps.add 'nvim-telescope/telescope.nvim'
+deps.add {
+  source = 'nvim-telescope/telescope-fzf-native.nvim',
+  checkout = '1f08ed60cafc8f6168b72b80be2b2ea149813e55',
+  hooks = { post_install = deps.make, post_checkout = deps.make },
+}
+deps.add { source = 'nvim-lua/plenary.nvim', checkout = 'b9fd5226c2f76c951fc8ed5923d85e4de065e509' }
+deps.add { source = 'nvim-telescope/telescope-ui-select.nvim', checkout = '6e51d7da30bd139a6950adf2a47fda6df9fa06d2' }
+deps.add { source = 'nvim-telescope/telescope-live-grep-args.nvim', checkout = 'b80ec2c70ec4f32571478b501218c8979fab5201' }
+deps.add { source = 'nvim-telescope/telescope-file-browser.nvim', checkout = '3610dc7dc91f06aa98b11dca5cc30dfa98626b7e' }
+deps.add { source = 'nvim-tree/nvim-web-devicons', checkout = '3362099de3368aa620a8105b19ed04c2053e38c0' }
+deps.add { source = 'DrKJeff16/project.nvim', checkout = '8c6bad7d22eef1b71144b401c9f74ed01526a4fb' }
+deps.add { source = 'nvim-telescope/telescope.nvim', checkout = 'b4da76be54691e854d3e0e02c36b0245f945c2c7' }
 
 require('telescope').setup {
   defaults = {
@@ -46,7 +49,7 @@ require('project_nvim').setup {
 require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'projects'
-pcall(require('telescope').load_extension 'live_grep_args')
+require('telescope').load_extension 'live_grep_args'
 
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').registers, { desc = 'Search registers' })
 

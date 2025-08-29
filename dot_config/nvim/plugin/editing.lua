@@ -1,6 +1,6 @@
 local deps = require 'custom.deps'
 
-deps.add 'echasnovski/mini.completion'
+deps.add { source = 'echasnovski/mini.completion', checkout = '7254cce7766f330170318c8bd4826ec3a3aac183' }
 
 require('mini.completion').setup {
   delay = {
@@ -15,27 +15,45 @@ require('mini.completion').setup {
   },
 }
 
-deps.add 'folke/flash.nvim'
+deps.add { source = 'folke/flash.nvim', checkout = '3c942666f115e2811e959eabbdd361a025db8b63' }
 
-require('flash').setup { modes = { search = { enabled = false } } }
+require('flash').setup {
+  modes = {
+    search = {
+      enabled = false,
+    },
+  },
+}
 
 vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
   require('flash').jump()
 end, { desc = 'Flash' })
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jj', function()
-  require('flash').treesitter()
-end, { desc = 'Flash Treesitter' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jv', function()
+  require('flash').treesitter {
+    label = { before = true, after = true },
+  }
+end, { desc = 'Treesitter select' })
 
-deps.add 'kylechui/nvim-surround'
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jj', function()
+  require('flash').treesitter {
+    jump = {
+      pos = 'start',
+      autojump = false,
+    },
+    label = { before = true, after = false },
+  }
+end, { desc = 'Treesitter jump' })
+
+deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
 require('nvim-surround').setup {}
 
-deps.add 'sunesimonsen/killring.nvim'
+deps.add { source = 'sunesimonsen/killring.nvim', checkout = '33f7f25486371bf61abfd3805aae7ab1428197ad' }
 
 require('killring').setup {}
 vim.keymap.set('n', '<leader>yy', ':KillRing<CR>', { desc = 'View yank history' })
 
-deps.add 'poljar/typos.nvim'
+deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
 require('typos').setup()
 
 -- Sets how neovim will display certain whitespace characters in the editor.
@@ -52,6 +70,9 @@ vim.opt.undofile = true
 
 -- Decrease update time
 vim.opt.updatetime = 250
+
+-- Fuzzy auto completion
+vim.opt.completeopt = 'menuone,noinsert,fuzzy'
 
 -- get contents of visual selection
 -- handle unpack deprecation
@@ -74,3 +95,7 @@ vim.keymap.set('v', '<C-r>', function()
   -- send parsed substitution command to command line
   vim.api.nvim_input('<Esc>:.,$s/' .. pattern .. '//gc<Left><Left><Left>')
 end)
+
+-- Center on page jumps
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')

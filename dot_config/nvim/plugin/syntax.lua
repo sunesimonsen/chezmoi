@@ -7,7 +7,7 @@ end
 
 deps.add {
   source = 'nvim-treesitter/nvim-treesitter',
-  checkout = 'main',
+  checkout = '4d9916e477e5d4e3b245845dfd285edf429f3252',
   monitor = 'main',
   hooks = {
     post_install = post_tree_sitter,
@@ -53,6 +53,6 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
   end,
 })
 
-deps.add 'echasnovski/mini.ai'
+deps.add { source = 'echasnovski/mini.ai', checkout = '1cd4f021a05c29acd4ab511c0981da14217daf38' }
 
 require('mini.ai').setup {}

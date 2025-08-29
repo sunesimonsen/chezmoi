@@ -1,6 +1,6 @@
 local deps = require 'custom.deps'
-deps.add 'tpope/vim-sleuth'
-deps.add 'stevearc/conform.nvim'
+deps.add { source = 'tpope/vim-sleuth', checkout = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' }
+deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d510321653044791d7937c7ec0fa' }
 
 require('conform').setup {
   notify_on_error = false,

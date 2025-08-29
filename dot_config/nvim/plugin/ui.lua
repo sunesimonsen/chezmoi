@@ -1,6 +1,6 @@
 local deps = require 'custom.deps'
 
-deps.add 'lewis6991/gitsigns.nvim'
+deps.add { source = 'lewis6991/gitsigns.nvim', checkout = '736f51d2bb684c06f39a2032f064d7244f549981' }
 
 require('gitsigns').setup {
   signs = {
@@ -12,7 +12,7 @@ require('gitsigns').setup {
   },
 }
 
-deps.add 'echasnovski/mini.statusline'
+deps.add { source = 'echasnovski/mini.statusline', checkout = 'f6917f4da995d64edf3728b1302dbd5d4561c912' }
 require('mini.statusline').setup {
   use_icons = vim.g.have_nerd_font,
 }

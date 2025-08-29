@@ -1,5 +1,5 @@
 local deps = require 'custom.deps'
-deps.add 'robitx/gp.nvim'
+deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c113eb935c0' }
 
 require('gp').setup {
   openai_api_key = os.getenv 'OPENAI_API_KEY',
@@ -10,7 +10,7 @@ require('gp').setup {
   },
 }
 
-vim.keymap.set('n', '<leader>ar', ':GpRewrite<CR>', { desc = 'Rewrite' })
+vim.keymap.set('v', '<leader>ar', ':GpRewrite<CR>', { desc = 'Rewrite' })
 vim.keymap.set('n', '<leader>arb', ':%GpRewrite<CR>', { desc = 'Rewrite buffer' })
 vim.keymap.set('n', '<leader>acn', ':GpChatNew<CR>', { desc = 'New chat' })
 vim.keymap.set('n', '<leader>acf', ':GpChatFinder<CR>', { desc = 'Find chat' })

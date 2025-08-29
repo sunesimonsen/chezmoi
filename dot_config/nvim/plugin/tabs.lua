@@ -1,3 +1,6 @@
+local deps = require 'custom.deps'
+deps.add { source = 'DrKJeff16/project.nvim', checkout = '8c6bad7d22eef1b71144b401c9f74ed01526a4fb' }
+
 vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Tab close' })
 vim.keymap.set('n', '<leader>to', ':tabonly<CR>', { desc = 'Tab only' })
 vim.keymap.set('n', '<C-j>', ':tabnext<CR>', { desc = 'Tab next' })
@@ -10,6 +13,14 @@ local function get_path()
   end
 
   return path
+end
+
+local function get_project_path()
+  return require('project_nvim.project').find_pattern_root()
+end
+
+local function get_git_path()
+  return vim.fn.trim(vim.fn.system 'git rev-parse --show-toplevel')
 end
 
 local runInTerminal = function(path, command)
@@ -32,7 +43,7 @@ end
 vim.keymap.set('n', '<leader>tt', openTerminalInTab, { desc = 'Tab terminal' })
 
 local openProjectTerminalInTab = function()
-  local path = require('project_nvim.project').find_pattern_root()
+  local path = get_project_path()
 
   runInTerminal(path, '$SHELL')
 end
@@ -40,7 +51,7 @@ end
 vim.keymap.set('n', '<leader>t<S-t>', openProjectTerminalInTab, { desc = 'Tab terminal (project)' })
 
 local openLazyGit = function()
-  local path = require('project_nvim.project').find_pattern_root()
+  local path = get_project_path()
 
   runInTerminal(path, 'lazygit')
 end
@@ -55,22 +66,18 @@ local openDirBrowser = function(path)
   vim.cmd 'Oil'
 end
 
-local function get_git_path()
-  return vim.fn.trim(vim.fn.system 'git rev-parse --show-toplevel')
-end
-
 vim.keymap.set('n', '<leader>gd', function()
   local ok, path = pcall(get_git_path)
   if ok then
     openDirBrowser(path)
   else
-    local project_path = require('project_nvim.project').find_pattern_root()
+    local project_path = get_project_path()
     openDirBrowser(project_path)
   end
 end, { desc = 'Open git dir in tab' })
 
 vim.keymap.set('n', '<leader>pd', function()
-  local path = require('project_nvim.project').find_pattern_root()
+  local path = get_project_path()
   openDirBrowser(path)
 end, { desc = 'Open project dir in tab' })
 
@@ -84,6 +91,49 @@ local openTabInBufDir = function()
 end
 
 vim.keymap.set('n', '<leader>tn', openTabInBufDir, { desc = 'Tab create' })
+
+local commands = {
+  {
+    dir = 'project',
+    command = 'yarn test --watch',
+  },
+  {
+    dir = 'git',
+    command = 'yarn lint',
+  },
+  {
+    dir = 'git',
+    command = 'yarn build',
+  },
+  {
+    dir = 'git',
+    command = 'yarn install',
+  },
+}
+
+vim.keymap.set('n', '<leader>tr', function()
+  vim.ui.select(commands, {
+    prompt = 'Command:',
+    format_item = function(item)
+      return item.command
+    end,
+  }, function(choice)
+    if not choice then
+      return
+    end
+
+    local path
+    if choice.dir == 'project' then
+      path = get_project_path()
+    elseif choice.dir == 'git' then
+      path = get_git_path()
+    else
+      path = get_path()
+    end
+
+    runInTerminal(path, choice.command)
+  end)
+end, { desc = 'Run' })
 
 vim.keymap.set('n', '<leader>td', function()
   openDirBrowser(get_path())

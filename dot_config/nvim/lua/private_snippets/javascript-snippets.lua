@@ -15,6 +15,7 @@ return {
     vim.snippet.add('it', 'it("$1", $2() => {\n  $0\n})')
     vim.snippet.add('let', 'let ${1:name} = $2')
     vim.snippet.add('log', 'console.log($0)')
+    vim.snippet.add('dir', 'console.dir($0, { depth: 10 })')
     vim.snippet.add('logv', 'console.log("${1:name}", $1)')
   end,
 }

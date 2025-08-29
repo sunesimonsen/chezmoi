@@ -18,23 +18,15 @@ end
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup { path = { package = path_package } }
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local make = function(data)
   vim.system({ 'make' }, { cwd = data.path }):wait()
 end
 
 local add = MiniDeps.add
 
-local add_and_make = function(source)
-  add { source = source, hooks = { post_install = make, post_checkout = make } }
-end
-
 add 'folke/lazydev.nvim'
 
 return {
   add = add,
-  add_and_make = add_and_make,
   make = make,
 }

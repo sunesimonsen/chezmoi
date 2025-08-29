@@ -1,5 +1,5 @@
 local deps = require 'custom.deps'
-deps.add 'folke/which-key.nvim'
+deps.add { source = 'folke/which-key.nvim', checkout = '370ec46f710e058c9c1646273e6b225acf47cbed' }
 
 require('which-key').setup {
   -- delay between pressing a key and opening which-key (milliseconds)
@@ -22,6 +22,7 @@ require('which-key').setup {
     { '<leader>n', group = 'Notes' },
     { '<leader>o', group = 'Open' },
     { '<leader>p', group = 'Projects' },
+    { '<leader>py', group = 'Node' },
     { '<leader>pt', group = 'Tests' },
     { '<leader>q', group = 'Quickfix' },
     { '<leader>r', group = 'Run' },
