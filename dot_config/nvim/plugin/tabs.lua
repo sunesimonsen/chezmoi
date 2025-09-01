@@ -1,10 +1,9 @@
-local deps = require 'custom.deps'
-deps.add { source = 'DrKJeff16/project.nvim', checkout = '8c6bad7d22eef1b71144b401c9f74ed01526a4fb' }
-
 vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Tab close' })
 vim.keymap.set('n', '<leader>to', ':tabonly<CR>', { desc = 'Tab only' })
 vim.keymap.set('n', '<C-j>', ':tabnext<CR>', { desc = 'Tab next' })
 vim.keymap.set('n', '<C-k>', ':tabprevious<CR>', { desc = 'Tab previous' })
+vim.keymap.set('n', '<leader>tgf', '<C-w>gf', { desc = 'Goto file' })
+vim.keymap.set('n', '<leader>tgF', '<C-w>gF', { desc = 'Goto file with line number' })
 
 local function get_path()
   local path = vim.fn.expand '%:p:h'

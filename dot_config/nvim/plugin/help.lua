@@ -1,6 +1,3 @@
-local deps = require 'custom.deps'
-deps.add { source = 'folke/which-key.nvim', checkout = '370ec46f710e058c9c1646273e6b225acf47cbed' }
-
 require('which-key').setup {
   -- delay between pressing a key and opening which-key (milliseconds)
   -- this setting is independent of vim.opt.timeoutlen

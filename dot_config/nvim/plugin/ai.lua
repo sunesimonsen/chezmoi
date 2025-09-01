@@ -1,6 +1,3 @@
-local deps = require 'custom.deps'
-deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c113eb935c0' }
-
 require('gp').setup {
   openai_api_key = os.getenv 'OPENAI_API_KEY',
   providers = {

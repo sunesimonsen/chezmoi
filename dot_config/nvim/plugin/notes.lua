@@ -1,9 +1,3 @@
-local deps = require 'custom.deps'
-
-deps.add { source = 'nvim-telescope/telescope.nvim', checkout = 'b4da76be54691e854d3e0e02c36b0245f945c2c7' }
---deps.add('sunesimonsen/notes.nvim')
-deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim' }
-
 require('notes').setup {
   dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted',
 }

@@ -16,5 +16,3 @@ end
 
 vim.keymap.set('n', '<leader>qq', toggle_quickfix, { desc = 'Toggle quickfix' })
 vim.keymap.set('n', '<leader>qd', ':cdo ', { desc = 'Quickfix do' })
-vim.keymap.set('n', '<M-j>', ':cnext<CR>', { desc = 'Next quickfix' })
-vim.keymap.set('n', '<M-k>', ':cprevious<CR>', { desc = 'Previous quickfix' })

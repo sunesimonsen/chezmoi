@@ -1,20 +1,3 @@
-local deps = require 'custom.deps'
-
-local post_tree_sitter = function(data)
-  deps.make(data)
-  vim.cmd 'TSUpdate'
-end
-
-deps.add {
-  source = 'nvim-treesitter/nvim-treesitter',
-  checkout = '4d9916e477e5d4e3b245845dfd285edf429f3252',
-  monitor = 'main',
-  hooks = {
-    post_install = post_tree_sitter,
-    post_checkout = post_tree_sitter,
-  },
-}
-
 vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
   callback = function(event)
     local bufnr = event.buf
@@ -52,7 +35,5 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
     end
   end,
 })
-
-deps.add { source = 'echasnovski/mini.ai', checkout = '1cd4f021a05c29acd4ab511c0981da14217daf38' }
 
 require('mini.ai').setup {}
