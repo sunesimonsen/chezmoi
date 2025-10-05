@@ -39,7 +39,12 @@ local openTerminalInTab = function()
   runInTerminal(path, '$SHELL')
 end
 
-vim.keymap.set('n', '<leader>tt', openTerminalInTab, { desc = 'Tab terminal' })
+vim.keymap.set('n', '<leader>t<S-t>', openTerminalInTab, { desc = 'Tab terminal' })
+
+vim.keymap.set('n', '<leader>gt', function()
+  local path = get_git_path()
+  runInTerminal(path, '$SHELL')
+end, { desc = 'Tab terminal (git dir)' })
 
 local openProjectTerminalInTab = function()
   local path = get_project_path()
@@ -47,7 +52,7 @@ local openProjectTerminalInTab = function()
   runInTerminal(path, '$SHELL')
 end
 
-vim.keymap.set('n', '<leader>t<S-t>', openProjectTerminalInTab, { desc = 'Tab terminal (project)' })
+vim.keymap.set('n', '<leader>tt', openProjectTerminalInTab, { desc = 'Tab terminal (project)' })
 
 local openLazyGit = function()
   local path = get_project_path()
@@ -108,6 +113,14 @@ local commands = {
     dir = 'git',
     command = 'yarn install',
   },
+  {
+    dir = 'git',
+    command = 'bundle exec rubocop -a',
+  },
+  {
+    dir = 'git',
+    command = 'bundle exec rspec',
+  },
 }
 
 vim.keymap.set('n', '<leader>tr', function()
@@ -130,7 +143,7 @@ vim.keymap.set('n', '<leader>tr', function()
       path = get_path()
     end
 
-    runInTerminal(path, choice.command)
+    runInTerminal(path, choice.command .. '; read -n1')
   end)
 end, { desc = 'Run' })
 

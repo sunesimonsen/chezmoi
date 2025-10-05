@@ -26,6 +26,7 @@ require('conform').setup {
     javascript = { 'prettier' },
     typescript = { 'prettier' },
     javascriptreact = { 'prettier' },
+    typescriptreact = { 'prettier' },
     json = { 'prettier' },
     css = { 'prettier' },
     -- Use the "*" filetype to run formatters on all filetypes.

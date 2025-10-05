@@ -1,3 +1,5 @@
+vim.cmd 'packadd cfilter'
+
 local toggle_quickfix = function()
   local qf_exists = false
   for _, win in pairs(vim.fn.getwininfo()) do

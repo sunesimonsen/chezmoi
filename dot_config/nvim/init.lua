@@ -33,8 +33,7 @@ deps.add { source = 'neovim/nvim-lspconfig', checkout = '9141be4c1332afc83bdf1b0
 
 -- Tree sitter
 
-local post_tree_sitter = function(data)
-  deps.make(data)
+local post_tree_sitter = function()
   vim.cmd 'TSUpdate'
 end
 
@@ -52,12 +51,12 @@ deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d5103216530
 
 -- Editing
 
-deps.add { source = 'echasnovski/mini.completion', checkout = '7254cce7766f330170318c8bd4826ec3a3aac183' }
+deps.add { source = 'nvim-mini/mini.completion', checkout = '3009e3508209657aaa459b1753597f4a5eb5c684' }
 deps.add { source = 'folke/flash.nvim', checkout = '3c942666f115e2811e959eabbdd361a025db8b63' }
 deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
 deps.add { source = 'sunesimonsen/killring.nvim', checkout = '33f7f25486371bf61abfd3805aae7ab1428197ad' }
 deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
-deps.add { source = 'echasnovski/mini.ai', checkout = '1cd4f021a05c29acd4ab511c0981da14217daf38' }
+deps.add { source = 'nvim-mini/mini.ai', checkout = '45a26d032d8703f280c69c2ed9fb4e1bfc8f24f9' }
 
 -- Notes
 
@@ -72,7 +71,7 @@ deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c
 -- UI
 
 deps.add { source = 'lewis6991/gitsigns.nvim', checkout = '736f51d2bb684c06f39a2032f064d7244f549981' }
-deps.add { source = 'echasnovski/mini.statusline', checkout = 'f6917f4da995d64edf3728b1302dbd5d4561c912' }
+deps.add { source = 'nvim-mini/mini.statusline', checkout = '3c86b8a1cb67e347e91815b21662c28fd52ac144' }
 
 -- Theming
 
