@@ -2,10 +2,17 @@ require('notes').setup {
   dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted',
 }
 
-vim.keymap.set('n', '<leader>nn', ':Notes find<CR>', { desc = 'Find note' })
+require('telescope').load_extension 'find_note'
+require('telescope').load_extension 'search_notes'
+
+-- vim.keymap.set('n', '<leader>nn', ':Notes find<CR>', { desc = 'Find note' })
+-- vim.keymap.set('n', '<leader>ns', ':Notes search<CR>', { desc = 'Search through notes' })
+vim.keymap.set('n', '<leader>nn', ':Telescope find_note<CR>', { desc = 'Find note' })
+vim.keymap.set('n', '<leader>ns', ':Telescope search_notes<CR>', { desc = 'Search through notes' })
+
+vim.keymap.set('n', '<leader>nc', ':Notes create<CR>', { desc = 'Create note' })
 vim.keymap.set('n', '<leader>nl', ':Notes link_to_note<CR>', { desc = 'Link to note' })
 vim.keymap.set('n', '<leader>nr', ':Notes retitle<CR>', { desc = 'Retitle note' })
-vim.keymap.set('n', '<leader>ns', ':Notes search<CR>', { desc = 'Search through notes' })
 vim.keymap.set('n', '<leader>nt', ':Notes toggle_tag<CR>', { desc = 'Toggle tag' })
 vim.keymap.set('n', '<leader>ni', function()
   local notes = require 'notes'

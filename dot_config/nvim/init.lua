@@ -62,7 +62,7 @@ deps.add { source = 'nvim-mini/mini.ai', checkout = '45a26d032d8703f280c69c2ed9f
 
 --deps.add('sunesimonsen/notes.nvim')
 
-deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim' }
+deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim', checkout = 'ssimonsen/no-telescope' }
 
 -- AI
 
