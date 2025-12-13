@@ -1,5 +1,5 @@
 require('notes').setup {
-  dir = '/Users/ssimonsen/Library/CloudStorage/Dropbox/denoted',
+  dir = '~/Dropbox/denoted',
 }
 
 require('telescope').load_extension 'find_note'

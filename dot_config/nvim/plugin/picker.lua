@@ -36,6 +36,9 @@ require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'projects'
 require('telescope').load_extension 'live_grep_args'
 
+require('mini.pick').setup()
+require('mini.extra').setup()
+
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').registers, { desc = 'Search registers' })
 
 vim.keymap.set('n', '<leader>*', require('telescope.builtin').grep_string, { desc = 'Search current word' })

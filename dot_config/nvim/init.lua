@@ -3,6 +3,9 @@ vim.g.maplocalleader = ' '
 
 local deps = require 'custom.deps'
 
+-- Everything from mini.nvim
+deps.add { source = 'nvim-mini/mini.nvim', checkout = '9087880da9ed1e5b06a28b75b4424fd8218bd189' }
+
 -- Telescope
 
 deps.add {
@@ -51,18 +54,16 @@ deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d5103216530
 
 -- Editing
 
-deps.add { source = 'nvim-mini/mini.completion', checkout = '3009e3508209657aaa459b1753597f4a5eb5c684' }
 deps.add { source = 'folke/flash.nvim', checkout = '3c942666f115e2811e959eabbdd361a025db8b63' }
 deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
 deps.add { source = 'sunesimonsen/killring.nvim', checkout = '33f7f25486371bf61abfd3805aae7ab1428197ad' }
 deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
-deps.add { source = 'nvim-mini/mini.ai', checkout = '45a26d032d8703f280c69c2ed9fb4e1bfc8f24f9' }
 
 -- Notes
 
---deps.add('sunesimonsen/notes.nvim')
+deps.add 'sunesimonsen/notes.nvim'
 
-deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim', checkout = 'ssimonsen/no-telescope' }
+-- deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim', checkout = 'ssimonsen/no-telescope' }
 
 -- AI
 
@@ -71,7 +72,6 @@ deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c
 -- UI
 
 deps.add { source = 'lewis6991/gitsigns.nvim', checkout = '736f51d2bb684c06f39a2032f064d7244f549981' }
-deps.add { source = 'nvim-mini/mini.statusline', checkout = '3c86b8a1cb67e347e91815b21662c28fd52ac144' }
 
 -- Theming
 
