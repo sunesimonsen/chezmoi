@@ -1,3 +1,5 @@
+require('mini.icons').setup {}
+
 require('gitsigns').setup {
   signs = {
     add = { text = '+' },
@@ -9,7 +11,7 @@ require('gitsigns').setup {
 }
 
 require('mini.statusline').setup {
-  use_icons = vim.g.have_nerd_font,
+  use_icons = true,
 }
 
 -- Make line numbers default

@@ -43,39 +43,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Jump to the definition of the word under your cursor.
     --  This is where a variable was first declared, or where a function is defined, etc.
     --  To jump back, press <C-t>.
-    map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+    map('gd', ":Pick lsp scope='definition'<cr>", 'Goto Definition')
 
     -- Find references for the word under your cursor.
-    map('grr', require('telescope.builtin').lsp_references, 'Goto References')
+    map('grr', ":Pick lsp scope='references'<cr>", 'Goto References')
 
     -- Jump to the implementation of the word under your cursor.
     --  Useful when your language has ways of declaring types without an actual implementation.
-    map('gri', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+    map('gri', ":Pick lsp scope='implementation'<cr>", 'Goto Implementation')
 
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
-    map('<leader>ct', require('telescope.builtin').lsp_type_definitions, 'Type Definition')
+    map('<leader>ct', ":Pick lsp scope='type_definition'<cr>", 'Type Definition')
 
-    local lsp_document_symbols = function()
-      require('telescope.builtin').lsp_document_symbols {
-        preview = { hide_on_startup = false },
-      }
-    end
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map('gO', lsp_document_symbols, 'Document Symbols')
-    map('<leader>cc', lsp_document_symbols, 'Document Symbols')
-
-    local function lsp_dynamic_workspace_symbols()
-      require('telescope.builtin').lsp_dynamic_workspace_symbols {
-        preview = { hide_on_startup = false },
-      }
-    end
+    map('gO', ":Pick lsp scope='document_symbol'<cr>", 'Document Symbols')
+    map('<leader>cc', ":Pick lsp scope='document_symbol'<cr>", 'Document Symbols')
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map('<leader>cw', lsp_dynamic_workspace_symbols, 'Workspace Symbols')
+    map('<leader>cw', ":Pick lsp scope='workspace_symbol'<cr>", 'Workspace Symbols')
 
     -- WARN: This is not Goto Definition, this is Goto Declaration.
     --  For example, in C this would take you to the header.

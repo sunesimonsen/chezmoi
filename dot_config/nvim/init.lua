@@ -4,22 +4,12 @@ vim.g.maplocalleader = ' '
 local deps = require 'custom.deps'
 
 -- Everything from mini.nvim
+
 deps.add { source = 'nvim-mini/mini.nvim', checkout = '9087880da9ed1e5b06a28b75b4424fd8218bd189' }
 
--- Telescope
+-- Projects
 
-deps.add {
-  source = 'nvim-telescope/telescope-fzf-native.nvim',
-  checkout = '1f08ed60cafc8f6168b72b80be2b2ea149813e55',
-  hooks = { post_install = deps.make, post_checkout = deps.make },
-}
-deps.add { source = 'nvim-lua/plenary.nvim', checkout = 'b9fd5226c2f76c951fc8ed5923d85e4de065e509' }
-deps.add { source = 'nvim-telescope/telescope-ui-select.nvim', checkout = '6e51d7da30bd139a6950adf2a47fda6df9fa06d2' }
-deps.add { source = 'nvim-telescope/telescope-live-grep-args.nvim', checkout = 'b80ec2c70ec4f32571478b501218c8979fab5201' }
-deps.add { source = 'nvim-telescope/telescope-file-browser.nvim', checkout = '3610dc7dc91f06aa98b11dca5cc30dfa98626b7e' }
-deps.add { source = 'nvim-tree/nvim-web-devicons', checkout = '3362099de3368aa620a8105b19ed04c2053e38c0' }
 deps.add { source = 'DrKJeff16/project.nvim', checkout = '8c6bad7d22eef1b71144b401c9f74ed01526a4fb' }
-deps.add { source = 'nvim-telescope/telescope.nvim', checkout = 'b4da76be54691e854d3e0e02c36b0245f945c2c7' }
 
 -- LSP
 
@@ -56,14 +46,12 @@ deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d5103216530
 
 deps.add { source = 'folke/flash.nvim', checkout = '3c942666f115e2811e959eabbdd361a025db8b63' }
 deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
-deps.add { source = 'sunesimonsen/killring.nvim', checkout = '33f7f25486371bf61abfd3805aae7ab1428197ad' }
+deps.add 'sunesimonsen/killring.nvim'
 deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
 
 -- Notes
 
 deps.add 'sunesimonsen/notes.nvim'
-
--- deps.add { source = 'file:///Users/ssimonsen/Code/nvim/notes.nvim', checkout = 'ssimonsen/no-telescope' }
 
 -- AI
 

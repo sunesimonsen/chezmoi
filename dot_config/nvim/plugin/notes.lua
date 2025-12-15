@@ -2,13 +2,22 @@ require('notes').setup {
   dir = '~/Dropbox/denoted',
 }
 
-require('telescope').load_extension 'find_note'
-require('telescope').load_extension 'search_notes'
+local findNotes = function()
+  local notes = require 'notes'
 
+  MiniPick.builtin.files(nil, { source = { cwd = notes.dir } })
+end
+
+local searchNotes = function()
+  local notes = require 'notes'
+
+  MiniPick.builtin.grep_live(nil, { source = { cwd = notes.dir } })
+end
+
+vim.keymap.set('n', '<leader>nn', findNotes, { desc = 'Find note' })
+vim.keymap.set('n', '<leader>ns', searchNotes, { desc = 'Search notes' })
 -- vim.keymap.set('n', '<leader>nn', ':Notes find<CR>', { desc = 'Find note' })
 -- vim.keymap.set('n', '<leader>ns', ':Notes search<CR>', { desc = 'Search through notes' })
-vim.keymap.set('n', '<leader>nn', ':Telescope find_note<CR>', { desc = 'Find note' })
-vim.keymap.set('n', '<leader>ns', ':Telescope search_notes<CR>', { desc = 'Search through notes' })
 
 vim.keymap.set('n', '<leader>nc', ':Notes create<CR>', { desc = 'Create note' })
 vim.keymap.set('n', '<leader>nl', ':Notes link_to_note<CR>', { desc = 'Link to note' })
