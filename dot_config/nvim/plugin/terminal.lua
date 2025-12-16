@@ -1,3 +1,5 @@
+require('mini.cmdline').setup()
+
 vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'Configure new terminals',
   group = vim.api.nvim_create_augroup('custom-terminal-open', { clear = true }),
