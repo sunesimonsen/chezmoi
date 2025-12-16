@@ -64,7 +64,7 @@ MiniPick.registry.project = function()
   end)
 end
 
-vim.keymap.set('n', '<leader>pp', ':Pick project', { desc = 'Search projects' })
+vim.keymap.set('n', '<leader>pp', ':Pick project<cr>', { desc = 'Search projects' })
 
 vim.keymap.set('n', '<leader>tp', function()
   vim.cmd 'tabnew %'
