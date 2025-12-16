@@ -5,7 +5,7 @@ local deps = require 'custom.deps'
 
 -- Everything from mini.nvim
 
-deps.add { source = 'nvim-mini/mini.nvim', checkout = '9087880da9ed1e5b06a28b75b4424fd8218bd189' }
+deps.add { source = 'nvim-mini/mini.nvim', checkout = '6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1' }
 
 -- Projects
 
@@ -44,6 +44,7 @@ deps.add {
 }
 
 -- Formatting
+
 deps.add { source = 'tpope/vim-sleuth', checkout = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' }
 deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d510321653044791d7937c7ec0fa' }
 

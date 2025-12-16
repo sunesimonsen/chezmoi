@@ -12,10 +12,12 @@ require('mini.completion').setup {
 }
 
 require('mini.jump').setup()
-require('mini.jump2d').setup()
+
+local jump2d = require 'mini.jump2d'
+jump2d.setup()
 
 vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
-  local gen_spotter = require('mini.jump2d').gen_spotter
+  local gen_spotter = jump2d.gen_spotter
   local function jump_to_word()
     local res = {
       allowed_lines = { blank = false, fold = false },
@@ -34,7 +36,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
     return res
   end
 
-  MiniJump2d.start(jump_to_word())
+  jump2d.start(jump_to_word())
 end, { desc = 'Jump to word' })
 
 require('mini.surround').setup {}
