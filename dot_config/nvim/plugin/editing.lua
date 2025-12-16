@@ -11,41 +11,35 @@ require('mini.completion').setup {
   },
 }
 
-require('flash').setup {
-  modes = {
-    search = {
-      enabled = false,
-    },
-  },
-}
+require('mini.jump').setup()
+require('mini.jump2d').setup()
 
-vim.keymap.set({ 'n', 'x', 'o' }, 's', function()
-  require('flash').jump {
-    search = {
-      mode = function(str)
-        return '\\<' .. str
-      end,
-    },
-  }
-end, { desc = 'Flash' })
+vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
+  local gen_spotter = require('mini.jump2d').gen_spotter
+  local function jump_to_word()
+    local res = {
+      allowed_lines = { blank = false, fold = false },
+    }
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jv', function()
-  require('flash').treesitter {
-    label = { before = true, after = true },
-  }
-end, { desc = 'Treesitter select' })
+    local before_start = function()
+      local input = vim.fn.getcharstr()
+      -- Allow user to cancel input and not show any jumping spots
+      if input == nil then
+        return
+      end
+      res.spotter = gen_spotter.vimpattern('\\c\\<' .. vim.pesc(input) .. '\\k\\+')
+    end
+    res.hooks = { before_start = before_start }
 
-vim.keymap.set({ 'n', 'x', 'o' }, '<leader>jj', function()
-  require('flash').treesitter {
-    jump = {
-      pos = 'start',
-      autojump = false,
-    },
-    label = { before = true, after = false },
-  }
-end, { desc = 'Treesitter jump' })
+    return res
+  end
 
-require('nvim-surround').setup {}
+  MiniJump2d.start(jump_to_word())
+end, { desc = 'Jump to word' })
+
+require('mini.surround').setup {}
+require('mini.pairs').setup {}
+require('mini.bracketed').setup {}
 
 require('killring').setup {}
 vim.keymap.set('n', '<leader>yy', ':KillRing<CR>', { desc = 'View yank history' })

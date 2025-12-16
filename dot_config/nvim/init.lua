@@ -37,14 +37,18 @@ deps.add {
   hooks = { post_install = post_tree_sitter, post_checkout = post_tree_sitter },
 }
 
--- Formatting
+deps.add {
+  source = 'nvim-treesitter/nvim-treesitter-textobjects',
+  checkout = '0d7c800fadcfe2d33089f5726cb8907fc846eece',
+  monitor = 'main',
+}
 
+-- Formatting
 deps.add { source = 'tpope/vim-sleuth', checkout = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' }
 deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d510321653044791d7937c7ec0fa' }
 
 -- Editing
 
-deps.add { source = 'folke/flash.nvim', checkout = '3c942666f115e2811e959eabbdd361a025db8b63' }
 deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
 deps.add 'sunesimonsen/killring.nvim'
 deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
@@ -60,14 +64,6 @@ deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c
 -- UI
 
 deps.add { source = 'lewis6991/gitsigns.nvim', checkout = '736f51d2bb684c06f39a2032f064d7244f549981' }
-
--- Theming
-
-deps.add { source = 'folke/tokyonight.nvim', checkout = '057ef5d260c1931f1dffd0f052c685dcd14100a3' }
-
--- Help
-
-deps.add { source = 'folke/which-key.nvim', checkout = '370ec46f710e058c9c1646273e6b225acf47cbed' }
 
 -- Files
 

@@ -1,57 +1,83 @@
-require('which-key').setup {
-  -- delay between pressing a key and opening which-key (milliseconds)
-  -- this setting is independent of vim.opt.timeoutlen
-  delay = 400,
+local miniclue = require 'mini.clue'
+miniclue.setup {
+  triggers = {
+    -- Leader triggers
+    { mode = 'n', keys = '<Leader>' },
+    { mode = 'x', keys = '<Leader>' },
 
-  -- Document existing key chains
-  spec = {
-    { '<leader>a', group = 'AI' },
-    { '<leader>ac', group = 'Chat' },
-    { '<leader>ar', group = 'Rewrite' },
-    { '<leader>b', group = 'Buffers' },
-    { '<leader>c', group = 'Code' },
-    { '<leader>d', group = 'Directories' },
-    { '<leader>e', group = 'Errors' },
-    { '<leader>f', group = 'Files' },
-    { '<leader>g', group = 'Git' },
-    { '<leader>h', group = 'Help' },
-    { '<leader>j', group = 'Jump' },
-    { '<leader>n', group = 'Notes' },
-    { '<leader>o', group = 'Open' },
-    { '<leader>p', group = 'Projects' },
-    { '<leader>py', group = 'Node' },
-    { '<leader>pt', group = 'Tests' },
-    { '<leader>q', group = 'Quickfix' },
-    { '<leader>r', group = 'Run' },
-    { '<leader>s', group = 'Search' },
-    { '<leader>t', group = 'Tabs' },
-    { '<leader>v', group = 'Vim' },
-    { '<leader>vo', group = 'Open' },
-    { '<leader>w', group = 'Windows' },
-    { '<leader>x', group = 'Execute' },
-    { '<leader>y', group = 'Yank' },
+    -- Built-in completion
+    { mode = 'i', keys = '<C-x>' },
 
-    { 'gr', group = 'LSP' },
+    -- `g` key
+    { mode = 'n', keys = 'g' },
+    { mode = 'x', keys = 'g' },
 
-    -- Hide the window switching
-    { '<leader>1', hidden = true },
-    { '<leader>2', hidden = true },
-    { '<leader>3', hidden = true },
-    { '<leader>4', hidden = true },
+    -- Marks
+    { mode = 'n', keys = "'" },
+    { mode = 'n', keys = '`' },
+    { mode = 'x', keys = "'" },
+    { mode = 'x', keys = '`' },
 
-    -- Hide tab switching
-    { '<leader>t1', hidden = true },
-    { '<leader>t2', hidden = true },
-    { '<leader>t3', hidden = true },
-    { '<leader>t4', hidden = true },
+    -- Registers
+    { mode = 'n', keys = '"' },
+    { mode = 'x', keys = '"' },
+    { mode = 'i', keys = '<C-r>' },
+    { mode = 'c', keys = '<C-r>' },
+
+    -- Window commands
+    { mode = 'n', keys = '<C-w>' },
+
+    -- `z` key
+    { mode = 'n', keys = 'z' },
+    { mode = 'x', keys = 'z' },
+
+    -- `[` key
+    { mode = 'n', keys = '[' },
+    { mode = 'x', keys = '[' },
+
+    -- `]` key
+    { mode = 'n', keys = ']' },
+    { mode = 'x', keys = ']' },
+
+    -- `g` key
+    { mode = 'n', keys = 's' },
+    { mode = 'x', keys = 's' },
   },
 
-  icons = {
-    -- set icon mappings to true if you have a Nerd Font
-    mappings = true,
-    -- If you are using a Nerd Font: set icons.keys to an empty table which
-    -- will use the
-    -- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-    keys = {},
+  clues = {
+    -- Enhance this by adding descriptions for <Leader> mapping groups
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
+
+    { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+    { mode = 'n', keys = '<leader>a', desc = '+AI' },
+    { mode = 'n', keys = '<leader>ac', desc = '+Chat' },
+    { mode = 'v', keys = '<leader>ac', desc = '+Chat' },
+    { mode = 'n', keys = '<leader>b', desc = '+Buffers' },
+    { mode = 'n', keys = '<leader>c', desc = '+Code' },
+    { mode = 'n', keys = '<leader>d', desc = '+Directories' },
+    { mode = 'n', keys = '<leader>e', desc = '+Errors' },
+    { mode = 'n', keys = '<leader>f', desc = '+Files' },
+    { mode = 'n', keys = '<leader>g', desc = '+Git' },
+    { mode = 'n', keys = '<leader>h', desc = '+Help' },
+    { mode = 'n', keys = '<leader>j', desc = '+Jump' },
+    { mode = 'n', keys = '<leader>n', desc = '+Notes' },
+    { mode = 'n', keys = '<leader>o', desc = '+Open' },
+    { mode = 'n', keys = '<leader>p', desc = '+Projects' },
+    { mode = 'n', keys = '<leader>py', desc = '+Node' },
+    { mode = 'n', keys = '<leader>pt', desc = '+Tests' },
+    { mode = 'n', keys = '<leader>q', desc = '+Quickfix' },
+    { mode = 'n', keys = '<leader>r', desc = '+Run' },
+    { mode = 'n', keys = '<leader>s', desc = '+Search' },
+    { mode = 'n', keys = '<leader>t', desc = '+Tabs' },
+    { mode = 'n', keys = '<leader>v', desc = '+Vim' },
+    { mode = 'n', keys = '<leader>vo', desc = '+Open' },
+    { mode = 'n', keys = '<leader>w', desc = '+Windows' },
+    { mode = 'n', keys = '<leader>x', desc = '+Execute' },
+    { mode = 'n', keys = '<leader>y', desc = '+Yank' },
   },
 }

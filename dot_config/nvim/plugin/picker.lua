@@ -81,6 +81,8 @@ vim.keymap.set('n', '<leader>vs', function()
   MiniPick.builtin.grep_live(nil, { source = { cwd = vim.fn.stdpath 'config' } })
 end, { desc = 'Search Neovim files' })
 
+vim.keymap.set('n', '<leader>vc', ':Pick colorschemes<cr>', { desc = 'Colorschemes' })
+
 vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Search Git branches' })
 vim.keymap.set('n', '<leader>gc', ':Pick git_commits', { desc = 'Search Git commits' })
 vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'", { desc = 'Search file log' })
