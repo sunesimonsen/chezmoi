@@ -25,7 +25,7 @@ end, { desc = 'Search with grep (dir)' })
 
 vim.keymap.set('n', '<leader>sc', ':Pick commands<cr>', { desc = 'Search commands' })
 
-vim.keymap.set('n', '<leader>qs', ":Pick list scope='quickfix'", { desc = 'Search quickfixes' })
+vim.keymap.set('n', '<leader>qs', ":Pick list scope='quickfix'<cr>", { desc = 'Search quickfixes' })
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set('n', '<leader>ss', ":Pick buf_lines scope='current'<cr>", { desc = 'Search buffer' })
@@ -36,9 +36,7 @@ vim.keymap.set('n', '<leader>fg', function()
   MiniPick.builtin.files(nil, { source = { cwd = paths.get_git_path() } })
 end, { desc = 'Search Git files' })
 
-vim.keymap.set('n', '<leader>fd', function()
-  MiniPick.registry.explorer({ cwd = vim.fn.expand '%:p:h' }, nil)
-end, { desc = 'Browse' })
+vim.keymap.set('n', '<leader>fd', ':Pick explorer cwd="%:p:h"<cr>', { desc = 'Browse' })
 
 vim.keymap.set('n', '<leader>pd', ':Pick explorer<cr>', { desc = 'Browse project dir' })
 
@@ -92,9 +90,9 @@ end, { desc = 'Search Neovim files' })
 
 vim.keymap.set('n', '<leader>vc', ':Pick colorschemes<cr>', { desc = 'Colorschemes' })
 
-vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Search Git branches' })
-vim.keymap.set('n', '<leader>gc', ':Pick git_commits<cr>', { desc = 'Search Git commits' })
-vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'<cr>", { desc = 'Search file log' })
-vim.keymap.set('n', '<leader>gs', ':Pick git_hunks<cr>', { desc = 'Search Git status' })
+vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Branches' })
+vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'<cr>", { desc = 'File commits' })
+vim.keymap.set('n', '<leader>gL', ':Pick git_commits<cr>', { desc = 'Commits' })
+vim.keymap.set('n', '<leader>gs', ':Pick git_hunks<cr>', { desc = 'Unstaged' })
 
 vim.keymap.set('n', '<leader>yr', ':Pick registers<cr>', { desc = 'Yank register' })
