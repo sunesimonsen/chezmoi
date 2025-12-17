@@ -79,5 +79,6 @@ miniclue.setup {
     { mode = 'n', keys = '<leader>w', desc = '+Windows' },
     { mode = 'n', keys = '<leader>x', desc = '+Execute' },
     { mode = 'n', keys = '<leader>y', desc = '+Yank' },
+    { mode = 'n', keys = '<leader>tg', desc = '+Goto' },
   },
 }

@@ -62,29 +62,6 @@ end
 
 vim.keymap.set('n', '<leader>gg', openLazyGit, { desc = 'Lazygit' })
 
-local openDirBrowser = function(path)
-  vim.cmd 'tabnew'
-  if path then
-    vim.cmd('tcd ' .. path)
-  end
-  vim.cmd 'Oil'
-end
-
-vim.keymap.set('n', '<leader>gd', function()
-  local ok, path = pcall(get_git_path)
-  if ok then
-    openDirBrowser(path)
-  else
-    local project_path = get_project_path()
-    openDirBrowser(project_path)
-  end
-end, { desc = 'Open git dir in tab' })
-
-vim.keymap.set('n', '<leader>pd', function()
-  local path = get_project_path()
-  openDirBrowser(path)
-end, { desc = 'Open project dir in tab' })
-
 local openTabInBufDir = function()
   local path = get_path()
 
@@ -146,10 +123,6 @@ vim.keymap.set('n', '<leader>tr', function()
     runInTerminal(path, choice.command .. '; read -n1')
   end)
 end, { desc = 'Run' })
-
-vim.keymap.set('n', '<leader>td', function()
-  openDirBrowser(get_path())
-end, { desc = 'Open dir in tab' })
 
 for i = 1, 4 do
   vim.keymap.set('n', '<leader>t' .. i, i .. 'gt', { desc = 'Tab ' .. i })

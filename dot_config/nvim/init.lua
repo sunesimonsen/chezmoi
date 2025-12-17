@@ -45,7 +45,6 @@ deps.add {
 
 -- Formatting
 
-deps.add { source = 'tpope/vim-sleuth', checkout = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' }
 deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d510321653044791d7937c7ec0fa' }
 
 -- Editing
@@ -60,7 +59,3 @@ deps.add 'sunesimonsen/notes.nvim'
 -- AI
 
 deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c113eb935c0' }
-
--- Files
-
-deps.add { source = 'stevearc/oil.nvim', checkout = 'bbad9a76b2617ce1221d49619e4e4b659b3c61fc' }

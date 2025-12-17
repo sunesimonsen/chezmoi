@@ -33,19 +33,13 @@ vim.keymap.set('n', '<leader>ss', ":Pick buf_lines scope='current'<cr>", { desc 
 
 vim.keymap.set('n', '<leader>ff', ':Pick files<cr>', { desc = 'Search project files' })
 
-vim.keymap.set('n', '<leader>tf', function()
-  vim.cmd 'tabnew %'
-  MiniPick.builtin.files(nil)
-end, { desc = 'Tab search project files' })
-
-vim.keymap.set('n', '<leader>ts', function()
-  vim.cmd 'tabnew %'
-  MiniPick.builtin.grep_live(nil)
-end, { desc = 'Tab search project files' })
-
 vim.keymap.set('n', '<leader>fg', ':Pick git_files<cr>', { desc = 'Search Git files' })
 
-vim.keymap.set('n', '<leader>fd', ':Pick explorer<cr>', { desc = 'Browse' })
+vim.keymap.set('n', '<leader>fd', function()
+  MiniPick.registry.explorer({ cwd = vim.fn.expand '%:p:h' }, nil)
+end, { desc = 'Browse' })
+
+vim.keymap.set('n', '<leader>pd', ':Pick explorer<cr>', { desc = 'Browse project dir' })
 
 MiniPick.registry.project = function()
   local projects = require('project_nvim').get_recent_projects()
