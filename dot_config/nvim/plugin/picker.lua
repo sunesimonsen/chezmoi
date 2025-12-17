@@ -84,8 +84,8 @@ end, { desc = 'Search Neovim files' })
 vim.keymap.set('n', '<leader>vc', ':Pick colorschemes<cr>', { desc = 'Colorschemes' })
 
 vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Search Git branches' })
-vim.keymap.set('n', '<leader>gc', ':Pick git_commits', { desc = 'Search Git commits' })
-vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'", { desc = 'Search file log' })
+vim.keymap.set('n', '<leader>gc', ':Pick git_commits<cr>', { desc = 'Search Git commits' })
+vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'<cr>", { desc = 'Search file log' })
 vim.keymap.set('n', '<leader>gs', ':Pick git_hunks<cr>', { desc = 'Search Git status' })
 
 vim.keymap.set('n', '<leader>yr', ':Pick registers<cr>', { desc = 'Yank register' })

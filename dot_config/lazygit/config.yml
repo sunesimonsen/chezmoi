@@ -1,0 +1,5 @@
+gui:
+  tabWidth: 2
+  theme:
+    selectedLineBgColor:
+      - reverse

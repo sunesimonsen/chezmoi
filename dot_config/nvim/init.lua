@@ -50,7 +50,6 @@ deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d5103216530
 
 -- Editing
 
-deps.add { source = 'kylechui/nvim-surround', checkout = 'c271c9082886a24866353764cf96c9d957e95b2b' }
 deps.add 'sunesimonsen/killring.nvim'
 deps.add { source = 'poljar/typos.nvim', checkout = '9315badebfe72efd8020ae7b1d2f176903ea6794' }
 
@@ -61,10 +60,6 @@ deps.add 'sunesimonsen/notes.nvim'
 -- AI
 
 deps.add { source = 'robitx/gp.nvim', checkout = 'b32327fe4ee65d24acbab0f645747c113eb935c0' }
-
--- UI
-
-deps.add { source = 'lewis6991/gitsigns.nvim', checkout = '736f51d2bb684c06f39a2032f064d7244f549981' }
 
 -- Files
 

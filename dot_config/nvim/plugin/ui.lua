@@ -1,15 +1,5 @@
 require('mini.icons').setup {}
 
-require('gitsigns').setup {
-  signs = {
-    add = { text = '+' },
-    change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
-    changedelete = { text = '~' },
-  },
-}
-
 require('mini.statusline').setup {
   use_icons = true,
 }
