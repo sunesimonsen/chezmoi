@@ -91,12 +91,20 @@ local commands = {
     command = 'yarn install',
   },
   {
+    dir = 'project',
+    command = 'yarn check:ts',
+  },
+  {
     dir = 'git',
     command = 'bundle exec rubocop -a',
   },
   {
     dir = 'git',
     command = 'bundle exec rspec',
+  },
+  {
+    dir = 'git',
+    command = 'bundle install',
   },
 }
 
