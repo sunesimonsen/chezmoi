@@ -45,14 +45,20 @@ end, { desc = 'Browse' })
 
 vim.keymap.set('n', '<leader>pd', ':Pick explorer<cr>', { desc = 'Browse project dir' })
 
+local function get_file_name(path)
+  return path:match '([^/\\]+)$'
+end
+
 MiniPick.registry.project = function()
   local projects = require('project_nvim').get_recent_projects()
 
+  table.sort(projects, function(a, b)
+    return string.lower(a) < string.lower(b)
+  end)
+
   vim.ui.select(projects, {
     prompt = 'Project:',
-    format_item = function(path)
-      return path:match '([^/\\]+)$'
-    end,
+    format_item = get_file_name,
   }, function(path)
     if path then
       MiniPick.builtin.files(nil, { source = { cwd = path } })
