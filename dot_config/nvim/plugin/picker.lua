@@ -52,11 +52,19 @@ end
 MiniPick.registry.project = function()
   local projects = require('project_nvim').get_recent_projects()
 
-  table.sort(projects, function(a, b)
+  local items = {}
+
+  for _, value in pairs(projects) do
+    if not string.find(value, '/node_modules/') then
+      table.insert(items, value)
+    end
+  end
+
+  table.sort(items, function(a, b)
     return string.lower(a) < string.lower(b)
   end)
 
-  vim.ui.select(projects, {
+  vim.ui.select(items, {
     prompt = 'Project:',
     format_item = get_file_name,
   }, function(path)
