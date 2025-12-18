@@ -7,6 +7,8 @@ require('project_nvim').setup {
 require('mini.pick').setup()
 require('mini.extra').setup()
 
+local paths = require 'custom.paths'
+
 vim.keymap.set('n', '<leader>*', ":Pick grep pattern='<cword>'<cr>", { desc = 'Search current word' })
 vim.keymap.set('n', "<leader>'", ':Pick resume<cr>', { desc = 'Search resume' })
 
@@ -33,7 +35,9 @@ vim.keymap.set('n', '<leader>ss', ":Pick buf_lines scope='current'<cr>", { desc 
 
 vim.keymap.set('n', '<leader>ff', ':Pick files<cr>', { desc = 'Search project files' })
 
-vim.keymap.set('n', '<leader>fg', ':Pick git_files<cr>', { desc = 'Search Git files' })
+vim.keymap.set('n', '<leader>fg', function()
+  MiniPick.builtin.files(nil, { source = { cwd = paths.get_git_path() } })
+end, { desc = 'Search Git files' })
 
 vim.keymap.set('n', '<leader>fd', function()
   MiniPick.registry.explorer({ cwd = vim.fn.expand '%:p:h' }, nil)

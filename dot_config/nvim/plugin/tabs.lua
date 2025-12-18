@@ -5,6 +5,8 @@ vim.keymap.set('n', '<C-k>', ':tabprevious<CR>', { desc = 'Tab previous' })
 vim.keymap.set('n', '<leader>tgf', '<C-w>gf', { desc = 'Goto file' })
 vim.keymap.set('n', '<leader>tgF', '<C-w>gF', { desc = 'Goto file with line number' })
 
+local paths = require 'custom.paths'
+
 local function get_path()
   local path = vim.fn.expand '%:p:h'
   if string.match(path, '^term') then
@@ -12,14 +14,6 @@ local function get_path()
   end
 
   return path
-end
-
-local function get_project_path()
-  return require('project_nvim.project').find_pattern_root()
-end
-
-local function get_git_path()
-  return vim.fn.trim(vim.fn.system 'git rev-parse --show-toplevel')
 end
 
 local runInTerminal = function(path, command)
@@ -42,12 +36,12 @@ end
 vim.keymap.set('n', '<leader>t<S-t>', openTerminalInTab, { desc = 'Tab terminal' })
 
 vim.keymap.set('n', '<leader>gt', function()
-  local path = get_git_path()
+  local path = paths.get_git_path()
   runInTerminal(path, '$SHELL')
 end, { desc = 'Tab terminal (git dir)' })
 
 local openProjectTerminalInTab = function()
-  local path = get_project_path()
+  local path = paths.get_project_path()
 
   runInTerminal(path, '$SHELL')
 end
@@ -55,9 +49,7 @@ end
 vim.keymap.set('n', '<leader>tt', openProjectTerminalInTab, { desc = 'Tab terminal (project)' })
 
 local openLazyGit = function()
-  local path = get_project_path()
-
-  runInTerminal(path, 'lazygit')
+  runInTerminal(paths.get_git_path(), 'lazygit')
 end
 
 vim.keymap.set('n', '<leader>gg', openLazyGit, { desc = 'Lazygit' })
@@ -121,9 +113,9 @@ vim.keymap.set('n', '<leader>tr', function()
 
     local path
     if choice.dir == 'project' then
-      path = get_project_path()
+      path = paths.get_project_path()
     elseif choice.dir == 'git' then
-      path = get_git_path()
+      path = paths.get_git_path()
     else
       path = get_path()
     end

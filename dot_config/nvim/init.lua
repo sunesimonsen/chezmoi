@@ -19,7 +19,7 @@ deps.add {
   hooks = { post_install = deps.make, post_checkout = deps.make },
 }
 deps.add { source = 'williamboman/mason.nvim', checkout = '9e25c98d4826998460926f8c5c2284848d80ae89' }
-deps.add { source = 'williamboman/mason-lspconfig.nvim', checkout = '9141be4c1332afc83bdf1b0278dbb030f75ff8e3' }
+deps.add { source = 'williamboman/mason-lspconfig.nvim', checkout = '3b3571b4dadbcb464804466e9872e7246c316af7' }
 deps.add { source = 'WhoIsSethDaniel/mason-tool-installer.nvim', checkout = '517ef5994ef9d6b738322664d5fdd948f0fdeb46' }
 deps.add { source = 'j-hui/fidget.nvim', checkout = '4ec7bed6c86b671ddde03ca1b227343cfa3e65fa' }
 deps.add { source = 'neovim/nvim-lspconfig', checkout = '9141be4c1332afc83bdf1b0278dbb030f75ff8e3' }
