@@ -43,6 +43,20 @@ require('mini.surround').setup { respect_selection_type = true }
 require('mini.pairs').setup()
 require('mini.bracketed').setup()
 
+local spec_treesitter = require('mini.ai').gen_spec.treesitter
+require('mini.ai').setup {
+  custom_textobjects = {
+    F = spec_treesitter {
+      a = '@function.outer',
+      i = '@function.inner',
+    },
+    o = spec_treesitter {
+      a = { '@conditional.outer', '@loop.outer' },
+      i = { '@conditional.inner', '@loop.inner' },
+    },
+  },
+}
+
 require('killring').setup()
 vim.keymap.set('n', '<leader>yy', ':KillRing<CR>', { desc = 'View yank history' })
 

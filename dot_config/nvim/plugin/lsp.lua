@@ -33,22 +33,18 @@ local servers = {
   gopls = {},
 }
 
--- Ensure the servers and tools above are installed
---
--- To check the current status of installed tools and/or manually install
--- other tools, you can run
---    :Mason
-local ensure_installed = vim.tbl_keys(servers or {})
-
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+require('mason-tool-installer').setup { ensure_installed = servers }
 require('mason').setup()
 require('fidget').setup {}
 
 require('mason-lspconfig').setup {
   handlers = {
     function(server_name)
-      local server = servers[server_name] or {}
-      require('lspconfig')[server_name].setup(server)
+      vim.lsp.enable(server_name)
+      vim.lsp.config(server_name, servers[server_name] or {})
+      --TODO remove
+      --local server = servers[server_name] or {}
+      --require('lspconfig')[server_name].setup(server)
     end,
   },
 }
