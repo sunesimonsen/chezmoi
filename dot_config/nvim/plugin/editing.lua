@@ -39,11 +39,11 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
   jump2d.start(jump_to_word())
 end, { desc = 'Jump to word' })
 
-require('mini.surround').setup {}
-require('mini.pairs').setup {}
-require('mini.bracketed').setup {}
+require('mini.surround').setup()
+require('mini.pairs').setup()
+require('mini.bracketed').setup()
 
-require('killring').setup {}
+require('killring').setup()
 vim.keymap.set('n', '<leader>yy', ':KillRing<CR>', { desc = 'View yank history' })
 
 require('typos').setup()

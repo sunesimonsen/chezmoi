@@ -17,9 +17,6 @@ vim.keymap.set('n', '<leader>fr', ':Pick oldfiles<cr>', { desc = 'Search recent 
 
 vim.keymap.set('n', '<leader>es', ':Pick diagnostic<cr>', { desc = 'Search diagnostics' })
 
-vim.keymap.set('n', '<leader>sh', ':Pick help<cr>', { desc = 'Search help' })
-vim.keymap.set('n', '<leader>sk', ':Pick keymaps<cr>', { desc = 'Search keymaps' })
-
 vim.keymap.set('n', '<leader>sp', ':Pick grep_live<cr>', { desc = 'Search with grep' })
 
 vim.keymap.set('n', '<leader>sd', function()

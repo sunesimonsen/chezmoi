@@ -82,3 +82,6 @@ miniclue.setup {
     { mode = 'n', keys = '<leader>tg', desc = '+Goto' },
   },
 }
+
+vim.keymap.set('n', '<leader>hh', ':Pick help<cr>', { desc = 'Search help' })
+vim.keymap.set('n', '<leader>hk', ':Pick keymaps<cr>', { desc = 'Search keymaps' })
