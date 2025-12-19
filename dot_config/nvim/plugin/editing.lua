@@ -39,7 +39,7 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
   jump2d.start(jump_to_word())
 end, { desc = 'Jump to word' })
 
-require('mini.surround').setup()
+require('mini.surround').setup { respect_selection_type = true }
 require('mini.pairs').setup()
 require('mini.bracketed').setup()
 
