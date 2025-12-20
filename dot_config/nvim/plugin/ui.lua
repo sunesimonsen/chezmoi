@@ -1,8 +1,6 @@
 require('mini.icons').setup {}
 
-require('mini.statusline').setup {
-  use_icons = true,
-}
+require('mini.statusline').setup { use_icons = true }
 
 -- Make line numbers default
 vim.opt.number = false

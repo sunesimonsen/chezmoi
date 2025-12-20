@@ -44,7 +44,7 @@ local function get_file_name(path)
   return path:match '([^/\\]+)$'
 end
 
-MiniPick.registry.project = function()
+MiniPick.registry.projects = function()
   local projects = require('project_nvim').get_recent_projects()
 
   local items = {}
@@ -71,7 +71,7 @@ MiniPick.registry.project = function()
   end)
 end
 
-vim.keymap.set('n', '<leader>pp', ':Pick project<cr>', { desc = 'Search projects' })
+vim.keymap.set('n', '<leader>pp', ':Pick projects<cr>', { desc = 'Search projects' })
 
 vim.keymap.set('n', '<leader>tp', function()
   vim.cmd 'tabnew %'
