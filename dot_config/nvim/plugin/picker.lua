@@ -17,7 +17,7 @@ vim.keymap.set('n', '<leader>fr', ':Pick oldfiles<cr>', { desc = 'Search recent 
 
 vim.keymap.set('n', '<leader>es', ':Pick diagnostic<cr>', { desc = 'Search diagnostics' })
 
-vim.keymap.set('n', '<leader>sp', ':Pick grep_live<cr>', { desc = 'Search with grep' })
+vim.keymap.set('n', '<leader>sf', ':Pick grep_live<cr>', { desc = 'Search with grep' })
 
 vim.keymap.set('n', '<leader>sd', function()
   MiniPick.builtin.grep_live(nil, { source = { cwd = vim.fn.expand '%:p:h' } })
@@ -44,7 +44,7 @@ local function get_file_name(path)
   return path:match '([^/\\]+)$'
 end
 
-MiniPick.registry.projects = function()
+MiniPick.registry.project = function()
   local projects = require('project_nvim').get_recent_projects()
 
   local items = {}
@@ -71,7 +71,7 @@ MiniPick.registry.projects = function()
   end)
 end
 
-vim.keymap.set('n', '<leader>pp', ':Pick projects<cr>', { desc = 'Search projects' })
+vim.keymap.set('n', '<leader>pp', ':Pick project<cr>', { desc = 'Search projects' })
 
 vim.keymap.set('n', '<leader>tp', function()
   vim.cmd 'tabnew %'
@@ -93,6 +93,7 @@ vim.keymap.set('n', '<leader>vc', ':Pick colorschemes<cr>', { desc = 'Colorschem
 vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Branches' })
 vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'<cr>", { desc = 'File commits' })
 vim.keymap.set('n', '<leader>gL', ':Pick git_commits<cr>', { desc = 'Commits' })
-vim.keymap.set('n', '<leader>gs', ':Pick git_hunks<cr>', { desc = 'Unstaged' })
+vim.keymap.set('n', '<leader>gh', ':Pick git_hunks<cr>', { desc = 'Unstaged' })
+vim.keymap.set('n', '<leader>gf', ':Pick git_files scope="modified"<cr>', { desc = 'Unstaged' })
 
 vim.keymap.set('n', '<leader>yr', ':Pick registers<cr>', { desc = 'Yank register' })

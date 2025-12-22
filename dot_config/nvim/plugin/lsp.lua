@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>ct', ":Pick lsp scope='type_definition'<cr>", { desc = 'Type definition' })
     vim.keymap.set('n', 'gO', ":Pick lsp scope='document_symbol'<cr>", { desc = 'Document symbols' })
     vim.keymap.set('n', '<leader>cc', ":Pick lsp scope='document_symbol'<cr>", { desc = 'Document symbols' })
-    vim.keymap.set('n', '<leader>cw', ":Pick lsp scope='workspace_symbol'<cr>", { desc = 'Workspace symbols' })
+    vim.keymap.set('n', '<leader>cw', ":Pick lsp scope='workspace_symbol_live'<cr>", { desc = 'Workspace symbols' })
     vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
   end,
 })
