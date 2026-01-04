@@ -32,9 +32,7 @@ vim.keymap.set('n', '<leader>ss', ":Pick buf_lines scope='current'<cr>", { desc 
 
 vim.keymap.set('n', '<leader>ff', ':Pick files<cr>', { desc = 'Search project files' })
 
-vim.keymap.set('n', '<leader>fg', function()
-  MiniPick.builtin.files(nil, { source = { cwd = paths.get_git_path() } })
-end, { desc = 'Search Git files' })
+vim.keymap.set('n', '<leader>fg', ':Pick git_files<cr>', { desc = 'Search Git files' })
 
 vim.keymap.set('n', '<leader>fd', ':Pick explorer cwd="%:p:h"<cr>', { desc = 'Browse' })
 
