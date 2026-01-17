@@ -1,4 +1,5 @@
 require('mini.files').setup()
+require('mini.visits').setup()
 
 vim.keymap.set('n', '<leader>fs', ':w<CR>', { desc = 'Save file' })
 
@@ -20,3 +21,5 @@ vim.keymap.set('n', '<leader>dg', function()
     MiniFiles.open()
   end
 end, { desc = 'Edit current directory' })
+
+vim.keymap.set('n', '<leader>fn', ':e %:p:h/', { desc = 'New file' })

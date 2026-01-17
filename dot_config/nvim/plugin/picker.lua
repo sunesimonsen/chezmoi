@@ -13,11 +13,15 @@ vim.keymap.set('n', '<leader>*', ":Pick grep pattern='<cword>'<cr>", { desc = 'S
 vim.keymap.set('n', "<leader>'", ':Pick resume<cr>', { desc = 'Search resume' })
 
 vim.keymap.set('n', '<leader>bb', ':Pick buffers<cr>', { desc = 'Find existing buffers' })
-vim.keymap.set('n', '<leader>fr', ':Pick oldfiles<cr>', { desc = 'Search recent files' })
+vim.keymap.set('n', '<leader>fr', ':Pick visit_paths cwd=""<cr>', { desc = 'Search recent files' })
 
 vim.keymap.set('n', '<leader>es', ':Pick diagnostic<cr>', { desc = 'Search diagnostics' })
 
 vim.keymap.set('n', '<leader>sf', ':Pick grep_live<cr>', { desc = 'Search with grep' })
+vim.keymap.set('n', '<leader>sg', function()
+  local path = paths.get_git_path()
+  MiniPick.builtin.grep_live(nil, { source = { cwd = path } })
+end, { desc = 'Search with grep (from git dir)' })
 
 vim.keymap.set('n', '<leader>sd', function()
   MiniPick.builtin.grep_live(nil, { source = { cwd = vim.fn.expand '%:p:h' } })
@@ -32,7 +36,15 @@ vim.keymap.set('n', '<leader>ss', ":Pick buf_lines scope='current'<cr>", { desc 
 
 vim.keymap.set('n', '<leader>ff', ':Pick files<cr>', { desc = 'Search project files' })
 
-vim.keymap.set('n', '<leader>fg', ':Pick git_files<cr>', { desc = 'Search Git files' })
+vim.keymap.set('n', '<leader>fg', function()
+  local path = paths.get_git_path()
+  MiniPick.builtin.files(nil, { source = { cwd = path } })
+end, { desc = 'Find files from Git dir' })
+
+vim.keymap.set('n', '<leader>sg', function()
+  local path = paths.get_git_path()
+  MiniPick.builtin.grep_live(nil, { source = { cwd = path } })
+end, { desc = 'Search with grep (from git dir)' })
 
 vim.keymap.set('n', '<leader>fd', ':Pick explorer cwd="%:p:h"<cr>', { desc = 'Browse' })
 

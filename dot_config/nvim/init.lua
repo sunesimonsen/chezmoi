@@ -45,6 +45,7 @@ deps.add {
 
 -- Formatting
 
+deps.add { source = 'tpope/vim-sleuth', checkout = 'be69bff86754b1aa5adcbb527d7fcd1635a84080' }
 deps.add { source = 'stevearc/conform.nvim', checkout = '973f3cb73887d510321653044791d7937c7ec0fa' }
 
 -- Editing

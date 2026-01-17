@@ -88,6 +88,10 @@ local commands = {
   },
   {
     dir = 'git',
+    command = 'yarn format',
+  },
+  {
+    dir = 'git',
     command = 'bundle exec rubocop -a',
   },
   {
