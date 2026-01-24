@@ -7,6 +7,10 @@ local deps = require 'custom.deps'
 
 deps.add { source = 'nvim-mini/mini.nvim', checkout = '6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1' }
 
+-- Files
+
+deps.add { source = 'stevearc/oil.nvim', checkout = 'bbad9a76b2617ce1221d49619e4e4b659b3c61fc' }
+
 -- Projects
 
 deps.add { source = 'DrKJeff16/project.nvim', checkout = '8c6bad7d22eef1b71144b401c9f74ed01526a4fb' }

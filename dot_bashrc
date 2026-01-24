@@ -1,4 +1,5 @@
 # .bashrc
+export XDG_CONFIG_HOME=~/.config
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
