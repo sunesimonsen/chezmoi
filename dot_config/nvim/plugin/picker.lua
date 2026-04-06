@@ -104,6 +104,28 @@ vim.keymap.set('n', '<leader>gb', ':Pick git_branches<cr>', { desc = 'Branches' 
 vim.keymap.set('n', '<leader>gl', ":Pick git_commits path='%'<cr>", { desc = 'File commits' })
 vim.keymap.set('n', '<leader>gL', ':Pick git_commits<cr>', { desc = 'Commits' })
 vim.keymap.set('n', '<leader>gh', ':Pick git_hunks<cr>', { desc = 'Unstaged' })
-vim.keymap.set('n', '<leader>gf', ':Pick git_files scope="modified"<cr>', { desc = 'Unstaged' })
+--vim.keymap.set('n', '<leader>gf', ':Pick git_files scope="modified"<cr>', { desc = 'Unstaged' })
 
 vim.keymap.set('n', '<leader>yr', ':Pick registers<cr>', { desc = 'Yank register' })
+
+local git_status = function()
+  local output = vim.fn.system 'TERM=dumb git status -s'
+  local lines = vim.split(vim.fn.trim(output, '', 2), '\n')
+  local result = {}
+
+  for _, line in ipairs(lines) do
+    if string.match(line, '^ *[AM?]') then
+      table.insert(result, line)
+    end
+  end
+
+  return result
+end
+
+vim.keymap.set('n', '<leader>gs', function()
+  vim.ui.select(git_status(), {}, function(choice)
+    if choice then
+      vim.cmd('e ' .. string.sub(choice, 4))
+    end
+  end)
+end, { desc = 'Git status' })

@@ -1,5 +1,5 @@
 require('notes').setup {
-  dir = '~/Dropbox/denoted',
+  dir = '~/.notes',
 }
 
 local findNotes = function()
